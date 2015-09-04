@@ -1,0 +1,8 @@
+version = "0.1"
+package = "logo"
+license = "GPL"
+title = "Simple spatial ABM"
+depends = "terrame (>= 1.5)"
+authors = "Pedro R. Andrade"
+contact = "pedro.andrade@inpe.br"
+content = "Implements ABM paradigm for spatial models with at most one agent per cell."
