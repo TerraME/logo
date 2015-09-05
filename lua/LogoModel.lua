@@ -4,6 +4,7 @@ function LogoModel(data)
 	mandatoryTableArgument(data, "quantity", "number")
 	mandatoryTableArgument(data, "changes", "function")
 	optionalTableArgument(data, "dim", "number")
+	defaultTableValue(data, "chart", false)
 	optionalTableArgument(data, "init", "function")
 	optionalTableArgument(data, "space", "function")
 	optionalTableArgument(data, "background", "table")
@@ -53,6 +54,7 @@ function LogoModel(data)
 			Event{action = function()
 				instance.soc:execute()
 				instance.cs:notify()
+				instance.soc:notify()
 			end}
 		}
 
@@ -66,6 +68,13 @@ function LogoModel(data)
 			background = instance.background,
 			symbol = "turtle"
 		}
+
+		if instance.chart then
+			instance.chart = Chart{
+				target = instance.soc
+			}
+			instance.soc:notify()
+		end
 	end
 
 	return Model(data)
