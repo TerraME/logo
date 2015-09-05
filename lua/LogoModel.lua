@@ -55,6 +55,10 @@ function LogoModel(data)
 				instance.soc:execute()
 				instance.cs:notify()
 				instance.soc:notify()
+
+				if #instance.soc == 0 then
+					return false
+				end
 			end}
 		}
 
