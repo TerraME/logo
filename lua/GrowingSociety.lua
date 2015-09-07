@@ -8,7 +8,7 @@ GrowingSociety = LogoModel{
 	end,
 	changes = function(agent)
 		if Random():number() < 0.2 then
-			agent:reproduce()
+			agent:breed()
 		end
 
 		agent:walk()
