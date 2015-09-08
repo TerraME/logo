@@ -53,9 +53,9 @@ local function getLabyrinth(pattern)
 end
 
 Labyrinth = LogoModel{
-	map = Choice(labyrinths),
+	labyrynth = Choice(labyrinths),
 	space = function(instance)
-		return getLabyrinth(instance.map)
+		return getLabyrinth(instance.labyrinth)
 	end,
 	quantity = 1,
 	background = {

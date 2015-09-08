@@ -5,6 +5,7 @@ function LogoModel(data)
 	mandatoryTableArgument(data, "changes", "function")
 	optionalTableArgument(data, "dim", "number")
 	defaultTableValue(data, "chart", false)
+	defaultTableValue(data, "map", true)
 	optionalTableArgument(data, "init", "function")
 	optionalTableArgument(data, "space", "function")
 	optionalTableArgument(data, "background", "table")
@@ -22,6 +23,18 @@ function LogoModel(data)
 	data.changes = nil
 
 	data.init = function(instance)
+		if not instance.cell then
+			instance.cell = Cell{
+				state = function(cell)
+					if #cell:getAgents() == 0 then
+						return "empty"
+					else
+						return "full"
+					end
+				end
+			}
+		end
+
 		if space then
 			instance.cs = space(instance)
 		else
@@ -67,16 +80,26 @@ function LogoModel(data)
 			end}
 		}
 
-		if background then
-			background.target = instance.cs
-			instance.background = Map(background)
-		end
+		if instance.map then
+			if background then
+				background.target = instance.cs
+				instance.background = Map(background)
 
-		instance.map = Map{
-			target = instance.soc,
-			background = instance.background,
-			symbol = "turtle"
-		}
+				instance.map = Map{
+					target = instance.soc,
+					background = instance.background,
+					symbol = "turtle"
+				}
+			else
+				instance.map = Map{
+					target = instance.cs,
+					select = "state",
+					value = {"empty", "full"},
+					color = {"white", "black"}
+				}
+
+			end
+		end
 
 		if instance.chart then
 			instance.chart = Chart{
