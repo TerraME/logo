@@ -55,14 +55,17 @@ function LogoModel(data)
 			execute = changes,
 			emptyNeighbor = emptyNeighbor,
 			breed = breed,
-			countNeighbors = countNeighbors,
-			walk = walk
+			countNeighbors = countNeighbors
 		}
 
 		instance.soc = Society{
 			instance = instance.agent,
 			quantity = instance.quantity
 		}
+
+		forEachAgent(instance.soc, function(agent)
+			agent.walk = walk
+		end)
 
 		instance.cs:createNeighborhood()
 
