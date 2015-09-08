@@ -2,6 +2,8 @@
 --	type_ = "Agent",
 	--- Return an empty neighbor Cell. If there is no empty neighbor
 	-- then it returns false.
+	-- @arg agent An Agent.
+	-- @usage neigh = emptyNeighbor(agent)
 	emptyNeighbor = function(agent)
 		local empty = {}
 		forEachNeighbor(agent:getCell(), function(_, neigh)
@@ -17,6 +19,8 @@
 		return Random():sample(empty)
 	end
 	--- Count the number of Agents in the neighbor cells.
+	-- @arg agent An Agent.
+	-- @usage quantity = countNeighbors(agent)
 	countNeighbors = function(agent)
 		local count = 0
 		forEachNeighbor(agent:getCell(), function(_, neigh)
@@ -29,6 +33,7 @@
 	end
 	--- Walk to a random neighbor Cell. If there is no
 	-- empty neighbor then this function returns false.
+	-- @arg agent An Agent.
 	-- @usage agent:walk()
 	walk = function(agent)
 		local empty = agent:emptyNeighbor()
@@ -43,7 +48,8 @@
 	--- Reproduce the Agent to a random neighbor Cell.
 	-- If there is no empty neighbor cell then this
 	-- function returns nil.
-	-- @usage agent:reproduce()
+	-- @arg agent An Agent.
+	-- @usage agent:breed()
 	breed = function(agent)
 		local empty = agent:emptyNeighbor()
 

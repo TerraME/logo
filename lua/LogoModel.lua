@@ -1,5 +1,34 @@
 
 --- Template for simple ABM Model.
+-- @arg data.quantity The initial number of Agents in the model.
+-- @arg data.changes A function that gets an Agent and describes
+-- what happens with an Agent each time step.
+-- @arg data.dim The x and y dimensions of space.
+-- @arg data.chart A boolean value indicating whether a Chart
+-- with the number of Agents along the simulation should
+-- be drawn.
+-- @arg data.map A boolean value indicating whether a Map
+-- with the spatial distribution r of Agents along the 
+-- simulation should be drawn.
+-- @arg data.init An optional function that gets an Agent and
+-- creates the initial attributes of each Agent along the
+-- simulation.
+-- @arg data.background A string with the color of the
+-- background, or a table with some arguments to be used when
+-- creating the Map to be drawn.
+-- @arg data.space An optional function that creates
+-- a CellularSpace to be used along the simulation. When
+-- one uses this function, the argument dim is ignored.
+-- @usage SingleAgent = LogoModel{
+--     quantity = 1,
+--     dim = 15,
+--     background = "green",
+--     finalTime = 100,
+--     changes = function(agent)
+--         agent:walk()
+-- end
+-- }
+
 function LogoModel(data)
 	mandatoryTableArgument(data, "quantity", "number")
 	mandatoryTableArgument(data, "changes", "function")

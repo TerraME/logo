@@ -1,4 +1,5 @@
 
+--- A single agent moving around randomly.
 SingleAgent = LogoModel{
 	quantity = 1,
 	dim = 15,

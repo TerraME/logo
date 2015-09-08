@@ -1,4 +1,7 @@
 
+--- Model where a given Society grows, filling
+-- the whole space. Agents reproduce with 20% of
+-- probability if there is an empty neighbor.
 GrowingSociety = LogoModel{
 	quantity = 1,
 	dim = 20,

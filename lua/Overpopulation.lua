@@ -1,4 +1,8 @@
 
+--- Model where Agents die by overpopulation.
+-- Each Agent beeds with a probability of 30%
+-- and die if there are more than three Agents
+-- in the neighborhood.
 Overpopulation = LogoModel{
 	quantity = 10,
 	dim = 20,

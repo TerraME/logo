@@ -52,6 +52,10 @@ local function getLabyrinth(pattern)
 	return cs
 end
 
+--- A labyrynth, where agents move randomly from
+-- a given entrance until an exit point.
+-- There are some available labyrynths available.
+-- See the documentation of data.
 Labyrinth = LogoModel{
 	labyrynth = Choice(labyrinths),
 	space = function(instance)
