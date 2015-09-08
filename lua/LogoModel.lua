@@ -8,6 +8,11 @@ function LogoModel(data)
 	defaultTableValue(data, "map", true)
 	optionalTableArgument(data, "init", "function")
 	optionalTableArgument(data, "space", "function")
+
+	if type(data.background) == "string" then
+		data.background = {color = data.background}
+	end
+
 	optionalTableArgument(data, "background", "table")
 
 	local init = data.init

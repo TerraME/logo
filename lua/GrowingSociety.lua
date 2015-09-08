@@ -3,7 +3,7 @@ GrowingSociety = LogoModel{
 	quantity = 1,
 	dim = 20,
 	chart = true,
-	background = {color = "green"},
+	background = "green",
 	finalTime = 100,
 	init = function()
 	end,
