@@ -11,3 +11,9 @@ data{
 	source = "TerraME team"
 }
 
+data{
+	file = "maze.labyrinth",
+	summary = "A small maze.",
+	source = "TerraME team"
+}
+

@@ -6,7 +6,7 @@ return{
 		local l = Labyrinth{}
 
 		l:execute()
-		unitTest:assertEquals(#l.soc, 1)
+		unitTest:assertEquals(#l.soc, 0)
 	end,
 }
 

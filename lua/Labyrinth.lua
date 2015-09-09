@@ -6,8 +6,12 @@ forEachFile(packageInfo("logo").data, function(file)
 	end
 end)
 
+labyrinths.default = "room"
+
+local base = getPackage("base") -- this table will be unnecessary when TerraME 1.5.1 is released
+
 local function getLabyrinth(pattern)
-	local mfile = file(pattern..".labyrinth", "logo")
+	local mfile = base.file(pattern..".labyrinth", "logo")
 
 	local lines = {}
 	for line in io.lines(mfile) do 
@@ -40,8 +44,6 @@ local function getLabyrinth(pattern)
 				cs:get(x - 1, y - 1).state = "wall"
 			elseif value == "E" then
 				cs:get(x - 1, y - 1).state = "exit"
-			elseif value == "S" then
-				cs:get(x - 1, y - 1).state = "start"
 			else
 				customError("Invalid character '"..string.sub(line, x, x)
 					.."' in file "..mfile.." (line "..y..").")
@@ -64,12 +66,27 @@ Labyrinth = LogoModel{
 	quantity = 1,
 	background = {
 		select = "state",
-		value = {"wall", "start", "exit", "empty"},
-		color = {"black", "white", "red", "white"}
+		value = {"wall", "exit", "empty", "found"},
+		color = {"black", "red", "white", "green"}
 	},
-	finalTime = 100,
+	finalTime = 2000,
 	changes = function(agent)
-		agent:relocate()
+		local empty = {}
+		local exit
+		forEachNeighbor(agent:getCell(), function(_, neigh)
+			if neigh.state == "exit" then
+				exit = neigh
+			elseif neigh.state == "empty" then
+				table.insert(empty, neigh)
+			end
+		end)
+
+		if exit then
+			exit.state = "found"
+			agent:die()
+		else
+			agent:move(Random():sample(empty))
+		end
 	end
 }
 
