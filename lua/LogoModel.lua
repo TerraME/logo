@@ -25,7 +25,7 @@
 --     background = "green",
 --     finalTime = 100,
 --     changes = function(agent)
---         agent:walk()
+--         agent:relocate()
 -- end
 -- }
 
@@ -84,17 +84,14 @@ function LogoModel(data)
 			execute = changes,
 			emptyNeighbor = emptyNeighbor,
 			breed = breed,
-			countNeighbors = countNeighbors
+			countNeighbors = countNeighbors,
+			relocate = relocate
 		}
 
 		instance.soc = Society{
 			instance = instance.agent,
 			quantity = instance.quantity
 		}
-
-		forEachAgent(instance.soc, function(agent)
-			agent.walk = walk
-		end)
 
 		instance.cs:createNeighborhood()
 
@@ -105,8 +102,8 @@ function LogoModel(data)
 
 		instance.env:createPlacement()
 
-		instance.timer = Timer{
-			Event{action = function()
+		instance.env:add(Timer{
+			Event{action = function(e)
 				instance.soc:execute()
 				instance.cs:notify()
 				instance.soc:notify()
@@ -115,12 +112,17 @@ function LogoModel(data)
 					return false
 				end
 			end}
-		}
+		})
 
 		if instance.map then
 			if background then
-				background.target = instance.cs
-				instance.background = Map(background)
+				local mbackground = {
+					target = instance.cs,
+					value = background.value,
+					select = background.select,
+					color = background.color
+				}
+				instance.background = Map(mbackground)
 
 				instance.map = Map{
 					target = instance.soc,

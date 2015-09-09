@@ -5,15 +5,15 @@
 -- in the neighborhood.
 Overpopulation = LogoModel{
 	quantity = 10,
-	dim = 20,
+	dim = 10,
 	chart = true,
-	finalTime = 300,
+	finalTime = 60,
 	changes = function(agent)
 		if Random():number() < 0.3 then
 			agent:breed()
 		end
 
-		agent:walk()
+		agent:relocate()
 	
 		if agent:countNeighbors() > 3 then
 			agent:die()

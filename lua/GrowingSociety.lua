@@ -8,14 +8,12 @@ GrowingSociety = LogoModel{
 	chart = true,
 	background = "green",
 	finalTime = 100,
-	init = function()
-	end,
 	changes = function(agent)
 		if Random():number() < 0.2 then
 			agent:breed()
 		end
 
-		agent:walk()
+		agent:relocate()
 	end
 }
 

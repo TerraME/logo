@@ -34,8 +34,8 @@
 	--- Walk to a random neighbor Cell. If there is no
 	-- empty neighbor then this function returns false.
 	-- @arg agent An Agent.
-	-- @usage agent:walk()
-	walk = function(agent)
+	-- @usage agent:relocate()
+	relocate = function(agent)
 		local empty = agent:emptyNeighbor()
 
 		if not empty then
@@ -71,10 +71,7 @@ metaTableLogoAgent_ = {
 }
 
 function LogoAgent(data)
-	print("Logo Agent")
-	print(type(data.breed))
 	setmetatable(data, metaTableLogoAgent_)
-	print(type(data.breed))
 	return data
 end
 --]]

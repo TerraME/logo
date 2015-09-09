@@ -57,7 +57,7 @@ end
 -- There are some available labyrynths available.
 -- See the documentation of data.
 Labyrinth = LogoModel{
-	labyrynth = Choice(labyrinths),
+	labyrinth = Choice(labyrinths),
 	space = function(instance)
 		return getLabyrinth(instance.labyrinth)
 	end,
@@ -69,7 +69,7 @@ Labyrinth = LogoModel{
 	},
 	finalTime = 100,
 	changes = function(agent)
-		agent:walk()
+		agent:relocate()
 	end
 }
 

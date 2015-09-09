@@ -6,9 +6,9 @@
 -- probability of dying each time step after age 20.
 LifeCycle = LogoModel{
 	quantity = 10,
-	dim = 20,
+	dim = 10,
 	chart = true,
-	finalTime = 300,
+	finalTime = 100,
 	init = function(agent)
 		agent.age = 0
 	end,
@@ -19,7 +19,7 @@ LifeCycle = LogoModel{
 			agent:breed()
 		end
 
-		agent:walk()
+		agent:relocate()
 	
 		if Random():number() < 0.05 and agent.age >= 20 then
 			agent:die()

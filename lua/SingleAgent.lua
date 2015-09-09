@@ -6,7 +6,7 @@ SingleAgent = LogoModel{
 	background = "green",
 	finalTime = 100,
 	changes = function(agent)
-		agent:walk()
+		agent:relocate()
 	end
 }
 
