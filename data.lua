@@ -17,3 +17,15 @@ data{
 	source = "TerraME team"
 }
 
+data{
+	file = "default.sugar",
+	summary = "The traditional sugarscape.",
+	source = "TerraME team"
+}
+
+data{
+	file = "small.sugar",
+	summary = "A small sugarscape.",
+	source = "TerraME team"
+}
+

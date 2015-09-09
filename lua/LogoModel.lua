@@ -53,6 +53,9 @@ function LogoModel(data)
 	local space = data.space
 	data.space = nil
 
+	local cell = data.cell
+	data.cell = nil
+
 	local changes = data.changes
 	data.changes = nil
 
@@ -105,8 +108,15 @@ function LogoModel(data)
 		instance.env:add(Timer{
 			Event{action = function(e)
 				instance.soc:execute()
+
+				if cell then
+					forEachCell(instance.cs, cell)
+				end
+
 				instance.cs:notify()
 				instance.soc:notify()
+
+
 
 				if #instance.soc == 0 then
 					return false
@@ -120,7 +130,10 @@ function LogoModel(data)
 					target = instance.cs,
 					value = background.value,
 					select = background.select,
-					color = background.color
+					color = background.color,
+					min = background.min,
+					max = background.max,
+					slices = background.slices
 				}
 				instance.background = Map(mbackground)
 
