@@ -3,11 +3,15 @@
 
 return{
 	SingleAgent = function(unitTest)
-		local s = SingleAgent{}
+		local model = SingleAgent{}
 
-		s:execute()
+		unitTest:assertSnapshot(model.background, "SingleAgent-map-1-begin.bmp")
+		unitTest:assertSnapshot(model.map, "SingleAgent-map-2-begin.bmp")
 
-		unitTest:assertEquals(#s.soc, 1)
+		model:execute()
+
+		unitTest:assertSnapshot(model.background, "SingleAgent-map-1-end.bmp")
+		unitTest:assertSnapshot(model.map, "SingleAgent-map-2-end.bmp")
 	end,
 }
 

@@ -3,11 +3,14 @@
 
 return{
 	LifeCycle = function(unitTest)
-		local l = LifeCycle{}
+		local model = LifeCycle{}
 
-		l:execute()
+		unitTest:assertSnapshot(model.map, "LifeCycle-map-1-begin.bmp")
 
-		unitTest:assertSnapshot(l.chart, "LifeCycle-chart-1.bmp")
+		model:execute()
+
+		unitTest:assertSnapshot(model.chart, "LifeCycle-chart-1.bmp")
+		unitTest:assertSnapshot(model.map, "LifeCycle-map-1-end.bmp")
 	end,
 }
 

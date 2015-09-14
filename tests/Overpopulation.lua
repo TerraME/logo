@@ -3,11 +3,14 @@
 
 return{
 	Overpopulation = function(unitTest)
-		local o = Overpopulation{}
+		local model = Overpopulation{}
 
-		o:execute()
+		unitTest:assertSnapshot(model.map, "Overpopulation-map-1-begin.bmp")
 
-		unitTest:assertEquals(#o.soc, 39)
+		model:execute()
+
+		unitTest:assertSnapshot(model.chart, "Overpopulation-chart-1.bmp")
+		unitTest:assertSnapshot(model.map, "Overpopulation-map-1-end.bmp")
 	end,
 }
 

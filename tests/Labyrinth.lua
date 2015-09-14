@@ -3,10 +3,15 @@
 
 return{
 	Labyrinth = function(unitTest)
-		local l = Labyrinth{}
+		local model = Labyrinth{}
 
-		l:execute()
-		unitTest:assertEquals(#l.soc, 0)
+		unitTest:assertSnapshot(model.background, "Labyrinth-map-1-begin.bmp")
+		unitTest:assertSnapshot(model.map, "Labyrinth-map-2-begin.bmp")
+
+		model:execute()
+
+		unitTest:assertSnapshot(model.background, "Labyrinth-map-1-end.bmp")
+		unitTest:assertSnapshot(model.map, "Labyrinth-map-2-end.bmp")
 	end,
 }
 
