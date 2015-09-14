@@ -1,4 +1,5 @@
 files = {
+	"Utils.lua",
 	"LogoAgent.lua",
 	"LogoModel.lua",
 	"LifeCycle.lua",
