@@ -1,10 +1,4 @@
-local labyrinths = {}
-
-forEachFile(packageInfo("logo").data, function(file)
-	if string.sub(file, -10) == ".labyrinth" then
-		table.insert(labyrinths, string.sub(file, 1, -11))
-	end
-end)
+local labyrinths = filesByExtension("logo", ".labyrinth")
 
 labyrinths.default = "room"
 
@@ -12,6 +6,7 @@ labyrinths.default = "room"
 -- a given entrance until an exit point.
 -- There are some available labyrynths available.
 -- See the documentation of data.
+-- @image labyrinth.bmp
 Labyrinth = LogoModel{
 	labyrinth = Choice(labyrinths),
 	space = function(instance)

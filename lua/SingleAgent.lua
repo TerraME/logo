@@ -1,5 +1,6 @@
 
 --- A single agent moving around randomly.
+-- @image single-agent.bmp
 SingleAgent = LogoModel{
 	quantity = 1,
 	dim = 15,

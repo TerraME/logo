@@ -9,6 +9,7 @@ end)
 --- Model where a given Society grows, filling
 -- the whole space. Agents reproduce with 20% of
 -- probability if there is an empty neighbor.
+-- @image sugarscape.bmp
 Sugarscape = LogoModel{
 	sugarMap = Choice(sugar),
 	quantity = 10,

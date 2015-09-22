@@ -4,6 +4,7 @@
 -- 30 they have 30% of chance of reproducing if there
 -- is an empty neighbor cell. Agents have 5% of 
 -- probability of dying each time step after age 20.
+-- @image life-cycle.bmp
 LifeCycle = LogoModel{
 	quantity = 10,
 	dim = 10,

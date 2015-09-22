@@ -3,6 +3,7 @@
 -- Each Agent beeds with a probability of 30%
 -- and die if there are more than three Agents
 -- in the neighborhood.
+-- @image overpopulation.bmp
 Overpopulation = LogoModel{
 	quantity = 10,
 	dim = 10,
