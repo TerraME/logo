@@ -112,7 +112,9 @@
 		
 		
 		
-					<li><strong>LogoModel</strong></li>
+					<li>
+						<a href="../files/LogoModel.html">LogoModel</a>
+					</li>
 				
 			
 		
@@ -169,9 +171,7 @@
 		
 		
 		
-					<li>
-						<a href="../files/Utils.html">Utils</a>
-					</li>
+					<li><strong>Utils</strong></li>
 				
 			
 		
@@ -196,7 +196,7 @@
 				</div> <!-- id="navigation" -->
 
 				<div id="content">
-					<h1>LogoModel
+					<h1>Utils
 					
 					
 					</h1>
@@ -210,12 +210,51 @@
 
 					
 						
-						<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+
+						
+							<h2 class="function_list">Functions</h2>
+							<table class="function_list">
+							
+								
+									<tr>
+										<td class="name" nowrap><a href="#getLabyrinth">getLabyrinth</a>&nbsp;
+<td class="summary">Return a CellularSpace with the representation of a given labyrinth data available in the package.</td>
+									</tr>
+								
+							
+								
+									<tr>
+										<td class="name" nowrap><a href="#getSugar">getSugar</a>&nbsp;
+<td class="summary">Return a CellularSpace with the representation of a given sugarscape data available in the package.</td>
+									</tr>
+								
+							
+						
+						</table>
+					
+
+					
+
+					<!--<br/>
+					<br/>-->
+
+					
+						
+						<dl class="function">
+							
+									<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 
+<dt><h2><a name="getLabyrinth">
 
-<span class="description">Template for simple ABM Model.</span>
+	</a><strong>getLabyrinth</strong>&nbsp;
+
+</h2></dt>
+<dd>
+
+
+<span class="description">Return a CellularSpace with the representation of a given labyrinth data available in the package.</span>
 
 
 
@@ -225,42 +264,7 @@
 <ul><span class="arg">
 
     <li>
-	  <strong>background</strong>: A string with the color of the background, or a table with some arguments to be used when creating the Map to be drawn.
-    </li> 
-    
-  
-    <li>
-	  <strong>changes</strong>: A function that gets an Agent and describes what happens with an Agent each time step.
-    </li> 
-    
-  
-    <li>
-	  <strong>chart</strong>: A boolean value indicating whether a Chart with the number of Agents along the simulation should be drawn.
-    </li> 
-    
-  
-    <li>
-	  <strong>dim</strong>: The x and y dimensions of space.
-    </li> 
-    
-  
-    <li>
-	  <strong>init</strong>: An optional function that gets an Agent and creates the initial attributes of each Agent along the simulation.
-    </li> 
-    
-  
-    <li>
-	  <strong>map</strong>: A boolean value indicating whether a Map with the spatial distribution r of Agents along the simulation should be drawn.
-    </li> 
-    
-  
-    <li>
-	  <strong>quantity</strong>: The initial number of Agents in the model.
-    </li> 
-    
-  
-    <li>
-	  <strong>space</strong>: An optional function that creates a CellularSpace to be used along the simulation. When one uses this function, the argument dim is ignored.
+	  <strong>#1</strong>: A string with the name of a labyrinth.
     </li> 
     
   
@@ -273,15 +277,7 @@
 
 
 <h3>Usage</h3>
-<pre class="example"><code><span class="id">SingleAgent</span> = <span class="function">LogoModel</span>{
-    <span class="id">quantity</span> = <span class="number">1</span>,
-    <span class="id">dim</span> = <span class="number">15</span>,
-    <span class="id">background</span> = <span class="string">"green"</span>,
-    <span class="id">finalTime</span> = <span class="number">100</span>,
-    <span class="id">changes</span> = <span class="reserved">function</span>(<span class="id">agent</span>)
-        <span class="id">agent</span>:<span class="id">relocate</span>()
-<span class="reserved">end</span>
-}</code></pre>
+<pre class="example"><code><span class="id">cs</span> = <span class="function">getLabyrinth</span>(<span class="string">"room"</span>)</code></pre>
 
 
 
@@ -289,18 +285,54 @@
 </dd>
 
 
-						
-						
+						    	
+							
+									<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-						
-						</table>
-					
 
-					
+<dt><h2><a name="getSugar">
 
-					<!--<br/>
-					<br/>-->
+	</a><strong>getSugar</strong>&nbsp;
 
+</h2></dt>
+<dd>
+
+
+<span class="description">Return a CellularSpace with the representation of a given sugarscape data available in the package.</span>
+
+
+
+
+<!-- Function arguments -->
+  <h3>Arguments</h3>
+<ul><span class="arg">
+
+    <li>
+	  <strong>#1</strong>: A string with the name of a sugarscape.
+    </li> 
+    
+  
+  </span></ul>
+
+
+
+
+
+
+
+<h3>Usage</h3>
+<pre class="example"><code><span class="id">cs</span> = <span class="function">getSugar</span>(<span class="string">"room"</span>)</code></pre>
+
+
+
+
+</dd>
+
+
+						    	
+							
+						</dl>
 					
 
 					
