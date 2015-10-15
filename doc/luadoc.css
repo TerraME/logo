@@ -56,10 +56,8 @@ a:link { font-weight:bold; color: #004080; text-decoration: none; }
 a:visited { font-weight:bold; color: #006699; text-decoration: none; }
 a:link:hover { text-decoration:underline; }
 hr { color:#cccccc }
-.imgBorder {
-	border-width: 1px;
-	border-color: Black;
-}
+img { border-width: 0px; }
+
 
 h3 { padding-top: 1em; }
 

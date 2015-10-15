@@ -4,7 +4,9 @@ local base = getPackage("base") -- this table will be unnecessary when TerraME 1
 --- Return a CellularSpace with the representation of a given labyrinth
 -- data available in the package.
 -- @arg pattern A string with the name of a labyrinth.
--- @usage cs = getLabyrinth("room")
+-- @usage import("logo")
+--
+-- room = getLabyrinth("room")
 function getLabyrinth(pattern)
 	mandatoryArgument(1, "string", pattern)
 	local mfile = base.file(pattern..".labyrinth", "logo")
@@ -53,7 +55,9 @@ end
 --- Return a CellularSpace with the representation of a given sugarscape
 -- data available in the package.
 -- @arg pattern A string with the name of a sugarscape.
--- @usage cs = getSugar("room")
+-- @usage import("logo")
+--
+-- room = getSugar("default")
 function getSugar(pattern)
 	mandatoryArgument(1, "string", pattern)
 

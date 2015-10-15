@@ -1,17 +1,22 @@
-local sugar = {}
-
-forEachFile(packageInfo("logo").data, function(file)
-	if string.sub(file, -6) == ".sugar" then
-		table.insert(sugar, string.sub(file, 1, -7))
-	end
-end)
-
 --- Model where a given Society grows, filling
 -- the whole space. Agents reproduce with 20% of
 -- probability if there is an empty neighbor.
+-- @arg data.dim The x and y dimensions of space.
+-- @arg data.quantity The initial number of Agents in the model.
+-- @arg data.chart A boolean value indicating whether a Chart
+-- with the number of Agents along the simulation should
+-- be drawn.
+-- @arg data.finalTime The final simulation time.
+-- @arg data.map A boolean value indicating whether a Map
+-- with the spatial distribution r of Agents along the 
+-- simulation should be drawn.
+-- @arg data.sugarMap The spatial representation of the model.
+-- The available sugarscapes are described in the data available in the package.
+-- They should be used without ".sugar" extension. The default pattern is
+-- "room".
 -- @image sugarscape.bmp
 Sugarscape = LogoModel{
-	sugarMap = Choice(sugar),
+	sugarMap = Choice(filesByExtension("logo", ".sugar")),
 	quantity = 10,
 	finalTime = 200,
 	space = function(instance)

@@ -14,5 +14,8 @@ return{
 	relocate = function(unitTest)
 		unitTest:assert(true)
 	end,
+	LogoAgent = function(unitTest)
+		unitTest:assert(true)
+	end
 }
 

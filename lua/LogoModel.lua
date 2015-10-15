@@ -81,14 +81,9 @@ function LogoModel(data)
 			}
 		end
 
-		--instance.agent = LogoAgent{
-		instance.agent = Agent{
+		instance.agent = LogoAgent{
 			init = init,
-			execute = changes,
-			emptyNeighbor = emptyNeighbor,
-			breed = breed,
-			countNeighbors = countNeighbors,
-			relocate = relocate
+			execute = changes
 		}
 
 		instance.soc = Society{

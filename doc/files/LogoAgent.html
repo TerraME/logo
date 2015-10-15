@@ -88,6 +88,8 @@
 		
 	
 		
+			
+		
 	
 		
 			
@@ -111,6 +113,9 @@
 		
 		
 		
+					<li><strong>LogoAgent</strong></li>
+				
+			
 		
 					<li>
 						<a href="../files/LogoModel.html">LogoModel</a>
@@ -136,8 +141,6 @@
 		
 	
 		
-			
-		
 	
 		
 	
@@ -161,9 +164,6 @@
 		
 		
 		
-					<li><strong>LogoAgent</strong></li>
-				
-			
 		
 		
 		
@@ -209,6 +209,51 @@
 					
 
 					
+						
+						<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+
+<span class="description">Basic Agent for Logo models.</span>
+
+
+
+
+<!-- Function arguments -->
+  <h3>Arguments</h3>
+<ul><span class="arg">
+
+    <li>
+	  <strong>execute</strong>: A function that gets the agent itself as argument and is called every time step.
+    </li> 
+    
+  
+    <li>
+	  <strong>init</strong>: A function that gets the agent itself as argument and will be executed when the agent is initialized.
+    </li> 
+    
+  
+  </span></ul>
+
+
+
+
+
+
+
+<h3>Usage</h3>
+<pre class="example"><code><span class="id">import</span>(<span class="string">"logo"</span>)
+
+<span class="function">LogoAgent</span>{}</code></pre>
+
+
+
+
+</dd>
+
+
+						
 						
 
 						
@@ -291,7 +336,19 @@
 
 
 <h3>Usage</h3>
-<pre class="example"><code><span class="id">agent</span>:<span class="function">breed</span>()</code></pre>
+<pre class="example"><code><span class="id">import</span>(<span class="string">"logo"</span>)
+
+<span class="id">Breed</span> = <span class="function">LogoModel</span>{
+   <span class="id">quantity</span> = <span class="number">10</span>,
+   <span class="id">dim</span> = <span class="number">10</span>,
+   <span class="id">finalTime</span> = <span class="number">10</span>,
+   <span class="id">changes</span> = <span class="reserved">function</span>(<span class="id">agent</span>)
+       <span class="id">agent</span>:<span class="function">breed</span>()
+       <span class="id">agent</span>:<span class="id">relocate</span>()
+   <span class="reserved">end</span>
+}
+
+<span class="id">Breed</span>:<span class="id">execute</span>()</code></pre>
 
 
 
@@ -336,7 +393,18 @@
 
 
 <h3>Usage</h3>
-<pre class="example"><code><span class="id">quantity</span> = <span class="function">countNeighbors</span>(<span class="id">agent</span>)</code></pre>
+<pre class="example"><code><span class="id">import</span>(<span class="string">"logo"</span>)
+
+<span class="id">Count</span> = <span class="function">LogoModel</span>{
+   <span class="id">quantity</span> = <span class="number">3</span>,
+   <span class="id">dim</span> = <span class="number">3</span>,
+   <span class="id">finalTime</span> = <span class="number">2</span>,
+   <span class="id">changes</span> = <span class="reserved">function</span>(<span class="id">agent</span>)
+       <span class="id">print</span>(<span class="id">agent</span>:<span class="function">countNeighbors</span>())
+   <span class="reserved">end</span>
+}
+
+<span class="id">Count</span>:<span class="id">execute</span>()</code></pre>
 
 
 
@@ -381,7 +449,20 @@
 
 
 <h3>Usage</h3>
-<pre class="example"><code><span class="id">neigh</span> = <span class="function">emptyNeighbor</span>(<span class="id">agent</span>)</code></pre>
+<pre class="example"><code><span class="id">import</span>(<span class="string">"logo"</span>)
+
+<span class="id">Empty</span> = <span class="function">LogoModel</span>{
+   <span class="id">quantity</span> = <span class="number">6</span>,
+   <span class="id">dim</span> = <span class="number">3</span>,
+   <span class="id">finalTime</span> = <span class="number">10</span>,
+   <span class="id">changes</span> = <span class="reserved">function</span>(<span class="id">agent</span>)
+       <span class="reserved">if</span> <span class="reserved">not</span> <span class="id">agent</span>:<span class="function">emptyNeighbor</span>() <span class="reserved">then</span>
+           <span class="id">print</span>(<span class="string">"not empty"</span>)
+       <span class="reserved">end</span>
+   <span class="reserved">end</span>
+}
+
+<span class="id">Empty</span>:<span class="id">execute</span>()</code></pre>
 
 
 
@@ -426,7 +507,18 @@
 
 
 <h3>Usage</h3>
-<pre class="example"><code><span class="id">agent</span>:<span class="function">relocate</span>()</code></pre>
+<pre class="example"><code><span class="id">import</span>(<span class="string">"logo"</span>)
+
+<span class="id">Relocate</span> = <span class="function">LogoModel</span>{
+   <span class="id">quantity</span> = <span class="number">10</span>,
+   <span class="id">dim</span> = <span class="number">10</span>,
+   <span class="id">finalTime</span> = <span class="number">10</span>,
+   <span class="id">changes</span> = <span class="reserved">function</span>(<span class="id">agent</span>)
+       <span class="id">agent</span>:<span class="function">relocate</span>()
+   <span class="reserved">end</span>
+}
+
+<span class="id">Relocate</span>:<span class="id">execute</span>()</code></pre>
 
 
 
