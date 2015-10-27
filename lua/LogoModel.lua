@@ -146,7 +146,6 @@ function LogoModel(data)
 					value = {"empty", "full"},
 					color = {"white", "black"}
 				}
-
 			end
 		end
 
