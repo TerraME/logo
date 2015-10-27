@@ -11,8 +11,8 @@
 -- with the spatial distribution r of Agents along the 
 -- simulation should be drawn.
 -- @arg data.init An optional function that gets an Agent and
--- creates the initial attributes of each Agent along the
--- simulation.
+-- (optionally) the instance and creates the initial attributes
+-- of each Agent along the simulation.
 -- @arg data.background A string with the color of the
 -- background, or a table with some arguments to be used when
 -- creating the Map to be drawn.
@@ -81,8 +81,12 @@ function LogoModel(data)
 			}
 		end
 
+		if not init then
+			init = function() end
+		end
+
 		instance.agent = LogoAgent{
-			init = init,
+			init = function(agent) init(agent, instance) end,
 			execute = changes
 		}
 
@@ -110,8 +114,6 @@ function LogoModel(data)
 
 				instance.cs:notify()
 				instance.soc:notify()
-
-
 
 				if #instance.soc == 0 then
 					return false
