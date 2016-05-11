@@ -13,7 +13,7 @@ return{
 			getLabyrinth("abc")
 		end
 
-		unitTest:assertError(error_func, "File 'logo/data/abc.labyrinth' does not exist in package 'logo'.", 45)
+		unitTest:assertError(error_func, "File 'logo/data/abc.labyrinth' does not exist in package 'logo'.")
 
 		local maze = getLabyrinth("maze")
 
@@ -30,7 +30,7 @@ return{
 			getSugar("abc")
 		end
 
-		unitTest:assertError(error_func, "File 'logo/data/abc.sugar' does not exist in package 'logo'.", 45)
+		unitTest:assertError(error_func, "File 'logo/data/abc.sugar' does not exist in package 'logo'.")
 	
 		local default = getSugar("default")
 

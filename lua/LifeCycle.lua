@@ -10,30 +10,65 @@
 -- be drawn.
 -- @arg data.quantity The initial number of Agents in the model.
 -- @arg data.finalTime The final simulation time.
--- @arg data.map A boolean value indicating whether a Map
--- with the spatial distribution r of Agents along the 
--- simulation should be drawn.
 -- @image life-cycle.bmp
-LifeCycle = LogoModel{
+LifeCycle = Model{
 	quantity = 10,
 	dim = 10,
 	chart = true,
 	finalTime = 100,
-	init = function(agent)
-		agent.age = 0
-	end,
-	changes = function(agent)
-		agent.age = agent.age + 1
+	init = function(model)
+		model.agent = LogoAgent{
+			init = function(agent)
+				agent.age = 0
+			end,
+			execute = function(agent)
+				agent.age = agent.age + 1
 
-		if agent.age >= 15 and agent.age <= 30 and Random():number() < 0.3 then
-			agent:breed()
-		end
+				if agent.age >= 15 and agent.age <= 30 and Random():number() < 0.3 then
+					agent:breed()
+				end
 
-		agent:relocate()
+				agent:relocate()
 	
-		if Random():number() < 0.05 and agent.age >= 20 then
-			agent:die()
-		end
+				if Random():number() < 0.05 and agent.age >= 20 then
+					agent:die()
+				end
+			end
+		}
+		
+		model.soc = Society{
+			instance = model.agent,
+			quantity = model.quantity
+		}
+
+		model.cs = CellularSpace{
+			xdim = model.dim
+		}
+
+		model.cs:createNeighborhood()
+
+		model.env = Environment{
+			model.cs,
+			model.soc
+		}
+
+		model.env:createPlacement()
+
+		model.map = Map{
+			target = model.soc,
+			background = model.background,
+			symbol = "turtle"
+		}
+
+		model.chart = Chart{
+			target = model.soc
+		}
+
+		model.timer = Timer{
+			Event{action = model.soc},
+			Event{action = model.map},
+			Event{action = model.chart}
+		}
 	end
 }
 

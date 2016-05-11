@@ -10,13 +10,45 @@
 -- with the spatial distribution r of Agents along the 
 -- simulation should be drawn.
 -- @image single-agent.bmp
-SingleAgent = LogoModel{
+SingleAgent = Model{
 	quantity = 1,
 	dim = 15,
-	background = "green",
 	finalTime = 100,
-	changes = function(agent)
-		agent:relocate()
+	init = function(model)
+		model.cs = CellularSpace{
+			xdim = model.dim
+		}
+
+		model.cs:createNeighborhood()
+
+		model.agent = LogoAgent{
+			execute = function(self)
+				self:relocate()
+			end
+		}
+
+		model.soc = Society{
+			instance = model.agent,
+			quantity = model.quantity
+		}
+		
+		model.env = Environment{
+			model.cs,
+			model.soc
+		}
+
+		model.env:createPlacement{}
+
+		model.map = Map{
+			target = model.soc,
+			background = "green",
+			symbol = "turtle"
+		}
+
+		model.timer = Timer{
+			Event{action = model.soc},
+			Event{action = model.map}
+		}
 	end
 }
 

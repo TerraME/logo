@@ -1,3 +1,4 @@
+
 local labyrinths = filesByExtension("logo", ".labyrinth")
 
 labyrinths.default = "room"
@@ -20,35 +21,66 @@ labyrinths.default = "room"
 -- They should be used without ".labyrinth" extension. The default pattern is
 -- "room".
 -- @image labyrinth.bmp
-Labyrinth = LogoModel{
-	labyrinth = Choice(labyrinths),
-	space = function(instance)
-		return getLabyrinth(instance.labyrinth)
-	end,
+Labyrinth = Model{
 	quantity = 1,
-	background = {
-		select = "state",
-		value = {"wall", "exit", "empty", "found"},
-		color = {"black", "red", "white", "green"}
-	},
 	finalTime = 2000,
-	changes = function(agent)
-		local empty = {}
-		local exit
-		forEachNeighbor(agent:getCell(), function(_, neigh)
-			if neigh.state == "exit" then
-				exit = neigh
-			elseif neigh.state == "empty" then
-				table.insert(empty, neigh)
-			end
-		end)
+	labyrinth = Choice(labyrinths),
+	init = function(model)
+		model.cs = getLabyrinth(model.labyrinth)
+		model.cs:createNeighborhood()
 
-		if exit then
-			exit.state = "found"
-			agent:die()
-		else
-			agent:move(Random():sample(empty))
-		end
+		model.background = Map{
+			target = model.cs,
+			select = "state",
+			value = {"wall", "exit", "empty", "found"},
+			color = {"black", "red", "white", "green"}
+		}
+
+		model.agent = Agent{
+			execute = function(agent)
+				local empty = {}
+				local exit
+
+				forEachNeighbor(agent:getCell(), function(_, neigh)
+					if neigh.state == "exit" then
+						exit = neigh
+					elseif neigh.state == "empty" then
+						table.insert(empty, neigh)
+					end
+				end)
+
+				if exit then
+					exit.state = "found"
+					agent:leave() -- TODO: replace by die() in the future
+					agent.execute = function() end
+				else
+					agent:move(Random(empty):sample())
+				end
+			end
+		}
+		
+		model.soc = Society{
+			instance = model.agent,
+			quantity = model.quantity
+		}
+
+		model.env = Environment{
+			model.cs,
+			model.soc
+		}
+
+		model.env:createPlacement()
+
+		model.map = Map{
+			target = model.soc,
+			background = model.background,
+			symbol = "turtle"
+		}
+
+		model.timer = Timer{
+			Event{action = model.soc},
+			Event{action = model.map}
+		}
 	end
 }
 

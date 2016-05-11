@@ -3,12 +3,14 @@
 
 return{
 	Sugarscape = function(unitTest)
-		local model = Sugarscape{}
+		local model = Sugarscape{
+			finalTime = 5
+		}
 
 		unitTest:assertSnapshot(model.background, "Sugarscape-map-1-begin.bmp")
 		unitTest:assertSnapshot(model.map, "Sugarscape-map-2-begin.bmp")
 
-		model:execute()
+		model:run()
 
 		unitTest:assertSnapshot(model.background, "Sugarscape-map-1-end.bmp")
 		unitTest:assertSnapshot(model.map, "Sugarscape-map-2-end.bmp")

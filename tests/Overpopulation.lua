@@ -3,7 +3,9 @@
 
 return{
 	Overpopulation = function(unitTest)
-		local model = Overpopulation{}
+		local model = Overpopulation{
+			finalTime = 5
+		}
 
 		unitTest:assertSnapshot(model.map, "Overpopulation-map-1-begin.bmp")
 

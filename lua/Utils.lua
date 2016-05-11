@@ -9,7 +9,7 @@ local base = getPackage("base") -- this table will be unnecessary when TerraME 1
 -- room = getLabyrinth("room")
 function getLabyrinth(pattern)
 	mandatoryArgument(1, "string", pattern)
-	local mfile = base.file(pattern..".labyrinth", "logo")
+	local mfile = base.filePath(pattern..".labyrinth", "logo")
 
 	local lines = {}
 	for line in io.lines(mfile) do 
@@ -61,7 +61,7 @@ end
 function getSugar(pattern)
 	mandatoryArgument(1, "string", pattern)
 
-	local mfile = base.file(pattern..".sugar", "logo")
+	local mfile = base.filePath(pattern..".sugar", "logo")
 
 	local lines = {}
 	for line in io.lines(mfile) do 

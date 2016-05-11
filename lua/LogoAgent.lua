@@ -5,18 +5,13 @@ LogoAgent_ = {
 	-- @arg agent An Agent.
 	-- @usage import("logo")
 	--
-	-- Empty = LogoModel{
-	--    quantity = 6,
-	--    dim = 3,
-	--    finalTime = 10,
-	--    changes = function(agent)
-	--        if not agent:emptyNeighbor() then
+	-- agent = LogoAgent{
+	--    execute = function(self)
+	--        if not self:emptyNeighbor() then
 	--            print("not empty")
 	--        end
 	--    end
 	-- }
-	--
-	-- Empty:execute()
 	emptyNeighbor = function(agent)
 		local empty = {}
 		forEachNeighbor(agent:getCell(), function(_, neigh)
@@ -29,22 +24,17 @@ LogoAgent_ = {
 			return false
 		end
 
-		return Random():sample(empty)
+		return Random(empty):sample()
 	end,
 	--- Count the number of Agents in the neighbor cells.
 	-- @arg agent An Agent.
 	-- @usage import("logo")
 	--
-	-- Count = LogoModel{
-	--    quantity = 3,
-	--    dim = 3,
-	--    finalTime = 2,
-	--    changes = function(agent)
-	--        print(agent:countNeighbors())
+	-- agent = LogoAgent{
+	--    execute = function(self)
+	--        print(self:countNeighbors())
 	--    end
 	-- }
-	--
-	-- Count:execute()
 	countNeighbors = function(agent)
 		local count = 0
 		forEachNeighbor(agent:getCell(), function(_, neigh)
@@ -60,16 +50,11 @@ LogoAgent_ = {
 	-- @arg agent An Agent.
 	-- @usage import("logo")
 	--
-	-- Relocate = LogoModel{
-	--    quantity = 10,
-	--    dim = 10,
-	--    finalTime = 10,
-	--    changes = function(agent)
-	--        agent:relocate()
+	-- agent = LogoAgent{
+	--    execute = function(self)
+	--        self:relocate()
 	--    end
 	-- }
-	--
-	-- Relocate:execute()
 	relocate = function(agent)
 		local empty = agent:emptyNeighbor()
 
@@ -86,17 +71,12 @@ LogoAgent_ = {
 	-- @arg agent An Agent.
 	-- @usage import("logo")
 	--
-	-- Breed = LogoModel{
-	--    quantity = 10,
-	--    dim = 10,
-	--    finalTime = 10,
-	--    changes = function(agent)
-	--        agent:breed()
-	--        agent:relocate()
+	-- agent = LogoAgent{
+	--    execute = function(self)
+	--        self:breed()
+	--        self:relocate()
 	--    end
 	-- }
-	--
-	-- Breed:execute()
 	breed = function(agent)
 		local empty = agent:emptyNeighbor()
 

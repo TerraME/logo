@@ -58,8 +58,6 @@
 		
 	
 		
-	
-		
 			
 		
 	
@@ -69,6 +67,8 @@
 	
 		
 			
+		
+	
 		
 	
 		
@@ -98,8 +98,6 @@
 		
 	
 		
-			
-		
 	
 		
 	
@@ -124,11 +122,6 @@
 				
 			
 		
-					<li>
-						<a href="../files/LogoModel.html">LogoModel</a>
-					</li>
-				
-			
 		
 		
 		
@@ -158,9 +151,9 @@
 		
 	
 		
-	
-		
 			
+		
+	
 		
 	
 
@@ -178,17 +171,22 @@
 		
 		
 		
-		
 					<li>
 						<a href="../files/Utils.html">Utils</a>
 					</li>
 				
 			
 		
+		
 	</ul>
 
 
 <!-- Examples -->
+
+	
+		<h1><a href="../files/examples.html">Examples</a></h1>
+	
+
 
 
 <!-- Data -->
@@ -225,7 +223,9 @@
 
 
 
-<span class="description">Basic Agent for Logo models.</span>
+<span class="description">
+
+Basic Agent for Logo models.</span>
 
 
 
@@ -323,7 +323,9 @@
 <dd>
 
 
-<span class="description">Reproduce the Agent to a random neighbor Cell. If there is no empty neighbor cell then this function returns nil.</span>
+<span class="description">
+
+Reproduce the Agent to a random neighbor Cell. If there is no empty neighbor cell then this function returns nil.</span>
 
 
 
@@ -348,17 +350,12 @@
 <h3>Usage</h3>
 <pre class="example"><code><span class="id">import</span>(<span class="string">"logo"</span>)
 
-<span class="id">Breed</span> = <span class="function">LogoModel</span>{
-   <span class="id">quantity</span> = <span class="number">10</span>,
-   <span class="id">dim</span> = <span class="number">10</span>,
-   <span class="id">finalTime</span> = <span class="number">10</span>,
-   <span class="id">changes</span> = <span class="reserved">function</span>(<span class="id">agent</span>)
-       <span class="id">agent</span>:<span class="function">breed</span>()
-       <span class="id">agent</span>:<span class="id">relocate</span>()
+<span class="id">agent</span> = <span class="function">LogoAgent</span>{
+   <span class="id">execute</span> = <span class="reserved">function</span>(<span class="id">self</span>)
+       <span class="id">self</span>:<span class="function">breed</span>()
+       <span class="id">self</span>:<span class="id">relocate</span>()
    <span class="reserved">end</span>
-}
-
-<span class="id">Breed</span>:<span class="id">execute</span>()</code></pre>
+}</code></pre>
 
 
 
@@ -380,7 +377,9 @@
 <dd>
 
 
-<span class="description">Count the number of Agents in the neighbor cells.</span>
+<span class="description">
+
+Count the number of Agents in the neighbor cells.<br><br></span>
 
 
 
@@ -405,16 +404,11 @@
 <h3>Usage</h3>
 <pre class="example"><code><span class="id">import</span>(<span class="string">"logo"</span>)
 
-<span class="id">Count</span> = <span class="function">LogoModel</span>{
-   <span class="id">quantity</span> = <span class="number">3</span>,
-   <span class="id">dim</span> = <span class="number">3</span>,
-   <span class="id">finalTime</span> = <span class="number">2</span>,
-   <span class="id">changes</span> = <span class="reserved">function</span>(<span class="id">agent</span>)
-       <span class="id">print</span>(<span class="id">agent</span>:<span class="function">countNeighbors</span>())
+<span class="id">agent</span> = <span class="function">LogoAgent</span>{
+   <span class="id">execute</span> = <span class="reserved">function</span>(<span class="id">self</span>)
+       <span class="id">print</span>(<span class="id">self</span>:<span class="function">countNeighbors</span>())
    <span class="reserved">end</span>
-}
-
-<span class="id">Count</span>:<span class="id">execute</span>()</code></pre>
+}</code></pre>
 
 
 
@@ -436,7 +430,9 @@
 <dd>
 
 
-<span class="description">Return an empty neighbor Cell. If there is no empty neighbor then it returns false.</span>
+<span class="description">
+
+Return an empty neighbor Cell. If there is no empty neighbor then it returns false.<br><br></span>
 
 
 
@@ -461,18 +457,13 @@
 <h3>Usage</h3>
 <pre class="example"><code><span class="id">import</span>(<span class="string">"logo"</span>)
 
-<span class="id">Empty</span> = <span class="function">LogoModel</span>{
-   <span class="id">quantity</span> = <span class="number">6</span>,
-   <span class="id">dim</span> = <span class="number">3</span>,
-   <span class="id">finalTime</span> = <span class="number">10</span>,
-   <span class="id">changes</span> = <span class="reserved">function</span>(<span class="id">agent</span>)
-       <span class="reserved">if</span> <span class="reserved">not</span> <span class="id">agent</span>:<span class="function">emptyNeighbor</span>() <span class="reserved">then</span>
+<span class="id">agent</span> = <span class="function">LogoAgent</span>{
+   <span class="id">execute</span> = <span class="reserved">function</span>(<span class="id">self</span>)
+       <span class="reserved">if</span> <span class="reserved">not</span> <span class="id">self</span>:<span class="function">emptyNeighbor</span>() <span class="reserved">then</span>
            <span class="id">print</span>(<span class="string">"not empty"</span>)
        <span class="reserved">end</span>
    <span class="reserved">end</span>
-}
-
-<span class="id">Empty</span>:<span class="id">execute</span>()</code></pre>
+}</code></pre>
 
 
 
@@ -494,7 +485,9 @@
 <dd>
 
 
-<span class="description">Walk to a random neighbor Cell. If there is no empty neighbor then this function returns false.</span>
+<span class="description">
+
+Walk to a random neighbor Cell. If there is no empty neighbor then this function returns false.<br><br></span>
 
 
 
@@ -519,16 +512,11 @@
 <h3>Usage</h3>
 <pre class="example"><code><span class="id">import</span>(<span class="string">"logo"</span>)
 
-<span class="id">Relocate</span> = <span class="function">LogoModel</span>{
-   <span class="id">quantity</span> = <span class="number">10</span>,
-   <span class="id">dim</span> = <span class="number">10</span>,
-   <span class="id">finalTime</span> = <span class="number">10</span>,
-   <span class="id">changes</span> = <span class="reserved">function</span>(<span class="id">agent</span>)
-       <span class="id">agent</span>:<span class="function">relocate</span>()
+<span class="id">agent</span> = <span class="function">LogoAgent</span>{
+   <span class="id">execute</span> = <span class="reserved">function</span>(<span class="id">self</span>)
+       <span class="id">self</span>:<span class="function">relocate</span>()
    <span class="reserved">end</span>
-}
-
-<span class="id">Relocate</span>:<span class="id">execute</span>()</code></pre>
+}</code></pre>
 
 
 

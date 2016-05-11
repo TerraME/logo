@@ -58,8 +58,6 @@
 		
 	
 		
-	
-		
 			
 		
 	
@@ -69,6 +67,8 @@
 	
 		
 			
+		
+	
 		
 	
 		
@@ -98,8 +98,6 @@
 		
 	
 		
-			
-		
 	
 		
 	
@@ -126,11 +124,6 @@
 				
 			
 		
-					<li>
-						<a href="../files/LogoModel.html">LogoModel</a>
-					</li>
-				
-			
 		
 		
 		
@@ -160,9 +153,9 @@
 		
 	
 		
-	
-		
 			
+		
+	
 		
 	
 
@@ -180,17 +173,22 @@
 		
 		
 		
-		
 					<li>
 						<a href="../files/Utils.html">Utils</a>
 					</li>
 				
 			
 		
+		
 	</ul>
 
 
 <!-- Examples -->
+
+	
+		<h1><a href="../files/examples.html">Examples</a></h1>
+	
+
 
 
 <!-- Data -->
@@ -243,8 +241,6 @@
 							
 						
 							
-						
-							
 							<tr>
 								<td class="name"><a href = "#Overpopulation">Overpopulation</a></td>
 								<td class="summary">Model where Agents die by overpopulation.</td>
@@ -267,11 +263,13 @@
 						
 							
 						
+							
+						
 					</table>
 					<dl class="function">
 						
 							
-								<dt><h2>GrowingSociety<a name="GrowingSociety"></h2></dt>
+								<dt><a name="GrowingSociety"><h2>GrowingSociety</h2></dt>
 									
 									
 										
@@ -282,13 +280,9 @@
 										<h3>Arguments</h3>
 										<ul><span class="arg">
 										
-										    <li><strong>chart</strong>: A boolean value indicating whether a Chart with the number of Agents along the simulation should be drawn.</li> 
-										
 										    <li><strong>dim</strong>: The x and y dimensions of space.</li> 
 										
 										    <li><strong>finalTime</strong>: The final simulation time.</li> 
-										
-										    <li><strong>map</strong>: A boolean value indicating whether a Map with the spatial distribution r of Agents along the simulation should be drawn.</li> 
 										
 										    <li><strong>quantity</strong>: The initial number of Agents in the model.</li> 
 										
@@ -297,18 +291,16 @@
 							
 						
 							
-								<dt><h2>Heatbugs<a name="Heatbugs"></h2></dt>
+								<dt><a name="Heatbugs"><h2>Heatbugs</h2></dt>
 									
 									
 										
 										<center><img src=../../images/Heatbugs-map-1-end.bmp ></center><br><br>
 									
-									Heatbugs is an agent-based model inspired by the behavior of biological agents that seek to regulate the temperature of their surrounding environment around an optimum level. This model demonstrates how agents can organize themselves within a population. The agents can detect and alter the environmental conditions in their neighborhood, though they can only interact with other agents indirectly. Although this model does not match the behavior of any specific organism, it can be used to show how emergent behavior can arise as a result of different rules that govern the behavior of agents. The bugs (agents) exist in an environment composed of a grid of square patches. Each bug can move to another, more suitable patch, as long as it is not occupied by another bug. \ Each bug has an ideal temperature, though it is not the same for every bug. The bugs emit a certain amount of heat into the environment at each time step. This heat slowly disperses throughout the environment, though some is lost to cooling. The larger the discrepancy between the bug's patch temperature and its ideal temperature, the more unhappy it is. If the bug is not happy in its patch, it will move to an adjacent empty patch that most closely resembles its ideal temperature. A patch that is too warm will cause the bug to move to the coolest adjacent empty patch. In the same way, a patch that is too cold will cause the bug to move to the warmest adjacent empty patch. However, as the bugs only search their immediate neighborhood, it cannot be guaranteed that the bugs will always move to the most suitable patch available. The first version of this implementation was developed by Ondrej and Linda, as final work for Environmental Modeling course in Erasmus Mundus program, Munster University, 2014. It still needs further development.
+									Heatbugs is an agent-based model inspired by the behavior of biological agents that seek to regulate the temperature of their surrounding environment around an optimum level. This model demonstrates how agents can organize themselves within a population. The agents can detect and alter the environmental conditions in their neighborhood, though they can only interact with other agents indirectly. Although this model does not match the behavior of any specific organism, it can be used to show how emergent behavior can arise as a result of different rules that govern the behavior of agents. The bugs (agents) exist in an environment composed of a grid of square patches. Each bug can move to another, more suitable patch, as long as it is not occupied by another bug. Each bug has an ideal temperature, though it is not the same for every bug. The bugs emit a certain amount of heat into the environment at each time step. This heat slowly disperses throughout the environment, though some is lost to cooling. The larger the discrepancy between the bug's patch temperature and its ideal temperature, the more unhappy it is. If the bug is not happy in its patch, it will move to an adjacent empty patch that most closely resembles its ideal temperature. A patch that is too warm will cause the bug to move to the coolest adjacent empty patch. In the same way, a patch that is too cold will cause the bug to move to the warmest adjacent empty patch. However, as the bugs only search their immediate neighborhood, it cannot be guaranteed that the bugs will always move to the most suitable patch available. The first version of this implementation was developed by Ondrej and Linda, as final work for Environmental Modeling course in Erasmus Mundus program, Munster University, 2014. It still needs further development.
 									
 										<h3>Arguments</h3>
 										<ul><span class="arg">
-										
-										    <li><strong>chart</strong>: A boolean value indicating whether a Chart with the number of Agents along the simulation should be drawn.</li> 
 										
 										    <li><strong>diffusionRate</strong>: The rate of amount emitted by agent in each iteration. Default value is 0.9.</li> 
 										
@@ -322,13 +314,11 @@
 										
 										    <li><strong>initialCellTemperature</strong>: Initial temperature of each cell. Default is 10.</li> 
 										
-										    <li><strong>map</strong>: A boolean value indicating whether a Map.</li> 
-										
 										    <li><strong>outputHeat</strong>: Upper and lower edges of amount of heat emitted by agent in each iteration to its neighbors.  Default ranges from 10 to 20.</li> 
 										
 										    <li><strong>quantity</strong>: The initial number of Agents in the model.</li> 
 										
-										    <li><strong>randomMoveChance</strong>: Probability to move randomly, instead of choosing coolest/hottest neighbor. Default is 0.5.</li> 
+										    <li><strong>randomMoveChance</strong>: Probability to move randomly, instead of choosing coolest/hottest neighbor. Default is 0.5. with the number of Agents along the simulation should be drawn.</li> 
 										
 										    <li><strong>temperature</strong>: Sets minimum and maximum extend of legend. Default ranges from 0 to 150.</li> 
 										
@@ -337,7 +327,7 @@
 							
 						
 							
-								<dt><h2>Labyrinth<a name="Labyrinth"></h2></dt>
+								<dt><a name="Labyrinth"><h2>Labyrinth</h2></dt>
 									
 									
 										
@@ -365,7 +355,7 @@
 							
 						
 							
-								<dt><h2>LifeCycle<a name="LifeCycle"></h2></dt>
+								<dt><a name="LifeCycle"><h2>LifeCycle</h2></dt>
 									
 									
 										
@@ -382,8 +372,6 @@
 										
 										    <li><strong>finalTime</strong>: The final simulation time.</li> 
 										
-										    <li><strong>map</strong>: A boolean value indicating whether a Map with the spatial distribution r of Agents along the simulation should be drawn.</li> 
-										
 										    <li><strong>quantity</strong>: The initial number of Agents in the model.</li> 
 										
 										</ul>
@@ -393,9 +381,7 @@
 							
 						
 							
-						
-							
-								<dt><h2>Overpopulation<a name="Overpopulation"></h2></dt>
+								<dt><a name="Overpopulation"><h2>Overpopulation</h2></dt>
 									
 									
 										
@@ -405,8 +391,6 @@
 									
 										<h3>Arguments</h3>
 										<ul><span class="arg">
-										
-										    <li><strong>chart</strong>: A boolean value indicating whether a Chart with the number of Agents along the simulation should be drawn.</li> 
 										
 										    <li><strong>dim</strong>: The x and y dimensions of space.</li> 
 										
@@ -421,7 +405,7 @@
 							
 						
 							
-								<dt><h2>SingleAgent<a name="SingleAgent"></h2></dt>
+								<dt><a name="SingleAgent"><h2>SingleAgent</h2></dt>
 									
 									
 										
@@ -447,7 +431,7 @@
 							
 						
 							
-								<dt><h2>Sugarscape<a name="Sugarscape"></h2></dt>
+								<dt><a name="Sugarscape"><h2>Sugarscape</h2></dt>
 									
 									
 										
@@ -472,6 +456,8 @@
 										
 										</ul>
 									
+							
+						
 							
 						
 							

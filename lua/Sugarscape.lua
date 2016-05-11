@@ -15,49 +15,82 @@
 -- They should be used without ".sugar" extension. The default pattern is
 -- "room".
 -- @image sugarscape.bmp
-Sugarscape = LogoModel{
+Sugarscape = Model{
 	sugarMap = Choice(filesByExtension("logo", ".sugar")),
 	quantity = 10,
 	finalTime = 200,
-	space = function(instance)
-		local cs = getSugar(instance.sugarMap)
-		forEachCell(cs, function(cell)
+	init = function(model)
+		model.cs = getSugar(model.sugarMap)
+
+		model.cs:createNeighborhood{}
+
+		forEachCell(model.cs, function(cell)
 			cell.sugar = cell.maxSugar
 		end)
-		return cs
-	end,
-	background = {
-		select = "sugar",
-		min = 0,
-		max = 4,
-		slices = 5,
-		color = "Reds"
-	},
-	init = function(agent)
-		agent.sugar = 10
-	end,
-	cell = function(cell)
-		cell.sugar = cell.sugar + 0.25
-		if cell.sugar > cell.maxSugar then
-			cell.sugar = cell.maxSugar
+
+		model.cs.execute = function(cs)
+			forEachCell(cs, function(cell)
+				cell.sugar = cell.sugar + 0.25
+				if cell.sugar > cell.maxSugar then
+					cell.sugar = cell.maxSugar
+				end
+			end)
 		end
-	end,
-	changes = function(agent)
-		agent.sugar = agent.sugar - 1
 
-		local candidates = {agent:getCell()}
+		model.agent = LogoAgent{
+			init = function(agent)
+				agent.sugar = 10
+			end,
+			execute = function(agent)
+				agent.sugar = agent.sugar - 1
 
-		forEachNeighbor(agent:getCell(), function(_, neigh)
-			if neigh.sugar > candidates[1].sugar then
-				candidates = {neigh}
-			elseif neigh.sugar == candidates[1].sugar then
-				table.insert(candidates, neigh)
+				local candidates = {agent:getCell()}
+
+				forEachNeighbor(agent:getCell(), function(_, neigh)
+					if neigh.sugar > candidates[1].sugar then
+						candidates = {neigh}
+					elseif neigh.sugar == candidates[1].sugar then
+						table.insert(candidates, neigh)
+					end
+				end)
+
+				local target = Random(candidates):sample()
+				agent:move(target)
+				target.sugar = 0
 			end
-		end)
+		}
 
-		local target = Random():sample(candidates)
-		agent:move(target)
-		target.sugar = 0
+		model.soc = Society{
+			instance = model.agent,
+			quantity = model.quantity
+		}
+
+		model.env = Environment{
+			model.cs,
+			model.soc
+		}
+
+		model.env:createPlacement{}
+
+		model.background = Map{
+			target = model.cs,
+			select = "sugar",
+			min = 0,
+			max = 4,
+			slices = 5,
+			color = "Reds"
+		}
+
+		model.map = Map{
+			target = model.soc,
+			background = model.background
+		}
+
+		model.timer = Timer{
+			Event{action = model.cs},
+			Event{action = model.soc},
+			Event{action = model.map}
+		}
 	end
 }
 

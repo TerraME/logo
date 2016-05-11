@@ -3,14 +3,14 @@
 
 return{
 	GrowingSociety = function(unitTest)
-		local model = GrowingSociety{}
+		local model = GrowingSociety{
+			finalTime = 5
+		}
 
-		unitTest:assertSnapshot(model.background, "GrowingSociety-map-1-begin.bmp")
 		unitTest:assertSnapshot(model.map, "GrowingSociety-map-2-begin.bmp")
 
-		model:execute()
+		model:run()
 
-		unitTest:assertSnapshot(model.background, "GrowingSociety-map-1-end.bmp")
 		unitTest:assertSnapshot(model.chart, "GrowingSociety-chart-1.bmp")
 		unitTest:assertSnapshot(model.map, "GrowingSociety-map-2-end.bmp")
 	end,

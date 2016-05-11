@@ -3,12 +3,14 @@
 
 return{
 	Heatbugs = function(unitTest)
-		local model = Heatbugs{}
+		local model = Heatbugs{
+			finalTime = 5
+		}
 
 		unitTest:assertSnapshot(model.heatmap, "Heatbugs-map-1-begin.bmp")
 		unitTest:assertSnapshot(model.map, "Heatbugs-map-2-begin.bmp")
 
-		model:execute()
+		model:run()
 
 		unitTest:assertSnapshot(model.chart, "Heatbugs-chart-1.bmp")
 		unitTest:assertSnapshot(model.chartUnhappy, "Heatbugs-chart-2.bmp")
