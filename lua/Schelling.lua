@@ -11,7 +11,7 @@
 -- composition suits their preferences. The procedure is repeated until everyone finds a
 -- satisfactory home (or until the simulator’s patience is exhausted).
 Schelling = Model{
-	finalTime  = Choice{min = 750,  max = 5000, step =  250}, -- final simulation time
+	finalTime  = Choice{min = 500,  max = 5000, step =  250}, -- final simulation time
 	freeSpace  = Choice{min = 0.05, max = 0.20, step = 0.05}, -- free space 
 	dim        = Choice{min =   25, max =   40, step =    5}, -- dimension of the cell space
 	preference = Choice{min =    3, max =    6, step =    1}, -- how many should be like me
@@ -36,14 +36,14 @@ Schelling = Model{
 
 		-- define an agent whose state can be "free", "germany" or "brazil"
 		model.agent = Agent{
-			state = Random{free = model.freeSpace, brazil = model.range, germany = model.range},
+			state = Random{"brazil", "germany"},
 			-- function to test if the agent is unhappy with its neighbors
 			isUnhappy = function(agent)
 				local mycell = agent:getCell()
 				local likeme = 0
 				forEachNeighbor(mycell, function(cell, neigh)
 					local other = neigh:getAgent()
-					if agent and neigh:state() == agent.state then
+					if other and other.state == agent.state then
 						likeme = likeme + 1
 					end
 				end)
