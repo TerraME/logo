@@ -6,6 +6,7 @@ files = {
 	"LifeCycle.lua",
 	"Overpopulation.lua",
 	"SingleAgent.lua",
+	"PredatorPrey.lua",
 	"Sugarscape.lua",
 	"GrowingSociety.lua",
 	"Labyrinth.lua"
