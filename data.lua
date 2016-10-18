@@ -21,14 +21,14 @@ data{
 }
 
 data{
-	file = "default.sugar",
+	file = "default.pgm",
 	image = "default.bmp",
 	summary = "The traditional sugarscape.",
 	source = "TerraME team"
 }
 
 data{
-	file = "small.sugar",
+	file = "small.pgm",
 	image = "small.bmp",
 	summary = "A small sugarscape.",
 	source = "TerraME team"

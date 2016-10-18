@@ -1,26 +1,31 @@
+local patterns = {}
+
+local files = filesByExtension("logo", "pgm")
+
+forEachElement(files, function(_, file)
+    local _, name = file:split()
+	table.insert(patterns, name)
+end)
+
 --- Model where a given Society grows, filling
 -- the whole space. Agents reproduce with 20% of
 -- probability if there is an empty neighbor.
--- @arg data.dim The x and y dimensions of space.
 -- @arg data.quantity The initial number of Agents in the model.
--- @arg data.chart A boolean value indicating whether a Chart
--- with the number of Agents along the simulation should
--- be drawn.
 -- @arg data.finalTime The final simulation time.
--- @arg data.map A boolean value indicating whether a Map
--- with the spatial distribution r of Agents along the 
--- simulation should be drawn.
 -- @arg data.sugarMap The spatial representation of the model.
 -- The available sugarscapes are described in the data available in the package.
--- They should be used without ".sugar" extension. The default pattern is
+-- They should be used without ".pgm" extension. The default pattern is
 -- "room".
 -- @image sugarscape.bmp
 Sugarscape = Model{
-	sugarMap = Choice(filesByExtension("logo", ".sugar")),
+	sugarMap = Choice(patterns),
 	quantity = 10,
 	finalTime = 200,
 	init = function(model)
-		model.cs = getSugar(model.sugarMap)
+		model.cs = CellularSpace{
+			file = filePath(model.sugarMap..".pgm", "logo"),
+			attrname = "maxSugar"
+		}
 
 		model.cs:createNeighborhood{}
 
