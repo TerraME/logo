@@ -1,22 +1,30 @@
 
 --- Model where Agents die by overpopulation.
--- Each Agent beeds with a probability of 30%
+-- Each Agent breeds with a probability of 30%
 -- and die if there are more than three Agents
 -- in the neighborhood.
 -- @arg data.dim The x and y dimensions of space.
 -- @arg data.quantity The initial number of Agents in the model.
 -- @arg data.finalTime The final simulation time.
--- @arg data.map A boolean value indicating whether a Map
--- with the spatial distribution r of Agents along the 
--- simulation should be drawn.
 -- @image overpopulation.bmp
 Overpopulation = Model{
 	quantity = 10,
 	dim = 10,
 	finalTime = 60,
 	init = function(model)	
+		model.cell = Cell{
+			state = function(cell)
+				if cell:getAgent() then
+					return "full"
+				else
+					return "empty"
+				end
+			end
+		}
+
 		model.cs = CellularSpace{
-			xdim = model.dim
+			xdim = model.dim,
+			instance = model.cell
 		}
 
 		model.cs:createNeighborhood()
@@ -52,14 +60,16 @@ Overpopulation = Model{
 		model.env:createPlacement()
 
 		model.map = Map{
-			target = model.soc,
-			background = "green",
-			symbol = "turtle"
+			target = model.cs,
+			select = "state",
+			color = {"white", "black"},
+			value = {"empty", "full"}
 		}
 
 		model.timer = Timer{
 			Event{action = model.soc},
-			Event{action = model.map}
+			Event{action = model.map},
+			Event{action = model.chart}
 		}
 	end
 }

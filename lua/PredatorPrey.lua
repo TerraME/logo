@@ -1,6 +1,7 @@
 
--- @model Predator-prey dynamics. 
-
+--- Predator-prey dynamics. 
+-- @arg data.dim The x and y dimensions of space.
+-- @arg data.finalTime The final simulation time.
 PredatorPrey = Model{
     finalTime = 500,
     dim = 30,
@@ -54,7 +55,7 @@ PredatorPrey = Model{
                 
                 self:eat() 
                 
-                local sample = self:getCell():getNeighborhood():sample()
+                sample = self:getCell():getNeighborhood():sample()
                 
                 if self.energy >= 30 and sample:isEmpty() then
                     local child = self:reproduce()
@@ -90,7 +91,7 @@ PredatorPrey = Model{
                         self:move(sample)
                     end
                 elseif sample:getAgent().name == "rabbit" then
-                    prey = sample:getAgent()
+                    local prey = sample:getAgent()
                     
                     self.energy = self.energy + prey.energy * 0.2
                     prey:die()
@@ -154,7 +155,4 @@ PredatorPrey = Model{
         }
     end
 }
-
-PredatorPrey:run()
-
 

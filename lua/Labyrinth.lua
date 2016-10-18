@@ -1,21 +1,21 @@
 
-local labyrinths = filesByExtension("logo", ".labyrinth")
+local patterns = {}
 
-labyrinths.default = "room"
+local labyrinths = filesByExtension("logo", "labyrinth")
+
+forEachElement(labyrinths, function(_, file)
+    local _, name = file:split()
+	table.insert(patterns, name)
+end)
+
+patterns.default = "room"
 
 --- A labyrynth, where agents move randomly from
 -- a given entrance until an exit point.
 -- There are some available labyrynths available.
 -- See the documentation of data.
--- @arg data.dim The x and y dimensions of space.
--- @arg data.chart A boolean value indicating whether a Chart
--- with the number of Agents along the simulation should
--- be drawn.
 -- @arg data.finalTime The final simulation time.
 -- @arg data.quantity The initial number of Agents in the model.
--- @arg data.map A boolean value indicating whether a Map
--- with the spatial distribution r of Agents along the 
--- simulation should be drawn.
 -- @arg data.labyrinth The spatial representation of the model.
 -- The available labyrinths are described in the data available in the package.
 -- They should be used without ".labyrinth" extension. The default pattern is
@@ -23,8 +23,8 @@ labyrinths.default = "room"
 -- @image labyrinth.bmp
 Labyrinth = Model{
 	quantity = 1,
-	finalTime = 2000,
-	labyrinth = Choice(labyrinths),
+	finalTime = 1000,
+	labyrinth = Choice(patterns),
 	init = function(model)
 		model.cs = getLabyrinth(model.labyrinth)
 		model.cs:createNeighborhood()

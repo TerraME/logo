@@ -7,7 +7,7 @@ end
 local function diffuse(self)
 	local cell = self:getCell()
 	local amount = (cell.temp * self.diffusionRate) / 8
-	forEachNeighbor(cell, function(c, n) 
+	forEachNeighbor(cell, function(_, n)
 		n.temp = n.temp + amount
 	end)
 end
@@ -16,7 +16,7 @@ end
 local function step(self)
 	self:setUnhappiness()
 	if self.unhappiness > 0 then
-		local bestCell = nil
+		local bestCell
 		-- do step only if probability is reached
 		if Random():number(0, 1) < self.randomMoveChance then
 			bestCell = self:decideBestCell() -- decide which cell is the best
@@ -34,13 +34,13 @@ end
 -- choose the cell with maximum property (hottest/coldest)
 local function decideBestCell(self)
 	local currCell = self:getCell()
-	local diff = 0
+	local diff
 	local bestCell = currCell
 
 	if currCell.temp < self.idealTemp then -- if i am cold
 		-- choose max temp
 		diff = currCell.temp
-		forEachNeighbor(currCell, function(c, n) 
+		forEachNeighbor(currCell, function(_, n)
 			if n.temp > diff and n:isEmpty() then
 				diff = n.temp
 				bestCell = n
@@ -50,7 +50,7 @@ local function decideBestCell(self)
 		-- choose minimum temp
 		diff = currCell.temp
 
-		forEachNeighbor(currCell, function(c, n)
+		forEachNeighbor(currCell, function(_, n)
 			if n.temp < diff and n:isEmpty() then
 				diff = n.temp
 				bestCell = n
@@ -151,9 +151,9 @@ Heatbugs = Model{
 			instance = cell,
 			unhappiness = function(self)
 				local sum = 0
-				forEachCell(self, function(cell)
-					if not cell.placement or not cell.placement.agents[1] then return end
-					local ag = cell:getAgent()
+				forEachCell(self, function(mcell)
+					if not mcell.placement or not mcell.placement.agents[1] then return end
+					local ag = mcell:getAgent()
 
 					sum = sum + ag.unhappiness
 				end)
@@ -161,10 +161,10 @@ Heatbugs = Model{
 			end,
 			currentCellTemperature = function(self)
 				local sum = 0
-				forEachCell(self, function(cell)
-					if not cell.placement or not cell.placement.agents[1] then return end
+				forEachCell(self, function(mcell)
+					if not mcell.placement or not mcell.placement.agents[1] then return end
 
-					sum = sum + cell.temp
+					sum = sum + mcell.temp
 				end)
 				return sum
 			end,

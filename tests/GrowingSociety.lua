@@ -7,12 +7,12 @@ return{
 			finalTime = 5
 		}
 
-		unitTest:assertSnapshot(model.map, "GrowingSociety-map-2-begin.bmp")
+		unitTest:assertSnapshot(model.map, "GrowingSociety-map-2-begin.bmp", 0.1)
 
 		model:run()
 
-		unitTest:assertSnapshot(model.chart, "GrowingSociety-chart-1.bmp")
-		unitTest:assertSnapshot(model.map, "GrowingSociety-map-2-end.bmp")
+		unitTest:assertSnapshot(model.chart, "GrowingSociety-chart-1.bmp", 0.1)
+		unitTest:assertSnapshot(model.map, "GrowingSociety-map-2-end.bmp", 0.1)
 	end,
 }
 

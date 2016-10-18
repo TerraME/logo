@@ -10,11 +10,17 @@
 -- neighborhood and either stay put or move elsewhere depending on whether the local racial
 -- composition suits their preferences. The procedure is repeated until everyone finds a
 -- satisfactory home (or until the simulator’s patience is exhausted).
+-- @arg data.dim The x and y dimensions of space. The default value is 25.
+-- @arg data.freeSpace The percentage of space that is not filled with any agent
+-- along the simulation. The default value is 25.
+-- @arg data.preference What is the minimum number of neighbor agents be like me
+-- that makes me satisfied with my current cell? The default value is 3.
+-- @arg data.finalTime The final simulation time. The default value is 500.
 Schelling = Model{
-	finalTime  = Choice{min = 500,  max = 5000, step =  250}, -- final simulation time
-	freeSpace  = Choice{min = 0.05, max = 0.20, step = 0.05}, -- free space 
-	dim        = Choice{min =   25, max =   40, step =    5}, -- dimension of the cell space
-	preference = Choice{min =    3, max =    6, step =    1}, -- how many should be like me
+	finalTime  = Choice{min = 10,   default = 500},
+	freeSpace  = Choice{min = 0.05, max = 0.20, step = 0.05},
+	dim        = Choice{min =   25, max =   40, step =    5},
+	preference = Choice{min =    3, max =    6, step =    1},
 	init = function (model)
 		-- determine the percentage of each team
 		model.range = (1.0 - model.freeSpace) / 2
@@ -32,7 +38,7 @@ Schelling = Model{
 			instance     = model.cell
 		}
 
-		model.cs:createNeighborhood{strategy = "moore", wrap = true}
+		model.cs:createNeighborhood{wrap = true}
 
 		-- define an agent whose state can be "free", "germany" or "brazil"
 		model.agent = Agent{
@@ -41,7 +47,7 @@ Schelling = Model{
 			isUnhappy = function(agent)
 				local mycell = agent:getCell()
 				local likeme = 0
-				forEachNeighbor(mycell, function(cell, neigh)
+				forEachNeighbor(mycell, function(_, neigh)
 					local other = neigh:getAgent()
 					if other and other.state == agent.state then
 						likeme = likeme + 1
@@ -62,7 +68,7 @@ Schelling = Model{
 			-- 2. Select all empty cells
 			-- 3. Choose a random unhappy agent and put it in an empty cell
 			-- (repeat until final time)
-			execute = function(society)
+			execute = function()
 				-- a group of unhappy agents
 				model.unhappy_agents:filter()
 
@@ -70,7 +76,6 @@ Schelling = Model{
 				if #model.unhappy_agents > 0 then
 					-- get a random unhappy agent
 					local myagent = model.unhappy_agents:sample()
-					local oldcell = myagent:getCell()
 					
 					-- a trajectory of empty cells
 					local empty_cells = Trajectory{
@@ -93,9 +98,7 @@ Schelling = Model{
 		model.env = Environment{model.cs, model.society}
 
 		-- agents are place randomly
-		model.env:createPlacement{
-			strategy = "random"
-		}
+		model.env:createPlacement{}
 
 		model.unhappy_agents = Group{
 			target = model.society,
