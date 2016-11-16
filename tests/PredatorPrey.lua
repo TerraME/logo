@@ -3,7 +3,7 @@
 
 return{
 	PredatorPrey = function(unitTest)
-		local model = PredatorPrey{finalTime = 5}
+		local model = PredatorPrey{finalTime = 20}
 
 		unitTest:assertSnapshot(model.map1, "PredatorPrey-map-1-begin.bmp", 0.1)
 		unitTest:assertSnapshot(model.map2, "PredatorPrey-map-2-begin.bmp", 0.1)

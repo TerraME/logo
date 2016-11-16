@@ -31,10 +31,7 @@ GrowingSociety = Model{
 			quantity = model.quantity
 		}
 
-		model.env = Environment{
-			model.cs,
-			model.soc
-		}
+		model.env = Environment{model.cs, model.soc}
 
 		model.env:createPlacement()
 
