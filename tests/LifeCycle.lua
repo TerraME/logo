@@ -4,7 +4,7 @@
 return{
 	LifeCycle = function(unitTest)
 		local model = LifeCycle{
-			finalTime = 5
+			finalTime = 50
 		}
 
 		unitTest:assertSnapshot(model.map, "LifeCycle-map-1-begin.bmp", 0.1)

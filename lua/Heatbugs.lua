@@ -35,7 +35,7 @@ end
 local function decideBestCell(self)
 	local currCell = self:getCell()
 	local diff
-	local bestCell = currCell
+	local bestCell = {currCell}
 
 	if currCell.temp < self.idealTemp then -- if i am cold
 		-- choose max temp
@@ -43,7 +43,9 @@ local function decideBestCell(self)
 		forEachNeighbor(currCell, function(_, n)
 			if n.temp > diff and n:isEmpty() then
 				diff = n.temp
-				bestCell = n
+				bestCell = {n}
+			elseif n.temp == diff and n:isEmpty() then
+				table.insert(bestCell, n)
 			end
 		end)
 	else -- if i am hot
@@ -53,11 +55,14 @@ local function decideBestCell(self)
 		forEachNeighbor(currCell, function(_, n)
 			if n.temp < diff and n:isEmpty() then
 				diff = n.temp
-				bestCell = n
+				bestCell = {n}
+			elseif n.temp == diff and n:isEmpty() then
+				table.insert(bestCell, n)
 			end
 		end)
 	end
-	return bestCell
+
+	return Random(bestCell):sample()
 end
 
 -- increase a temp of current cell
@@ -125,6 +130,13 @@ Heatbugs = Model{
 	},
 	diffusionRate = 0.9,
 	randomMoveChance = 0.5,
+	interface = function()
+		return {
+			{"number"},
+			{"idealTemperature", "outputHeat"}, 
+			{"temperature"}
+		}
+	end,
 	init = function(model)
 		local cell = Cell{
 			evaporationRate = model.evaporationRate,
@@ -187,21 +199,21 @@ Heatbugs = Model{
 		}
 
 		local agent = Agent{
+			diffuse = diffuse,
+			step = step,
+			heatCell = heatCell,
+			setUnhappiness = setUnhappiness,
+			decideBestCell = decideBestCell,
+			minIdealTemp = model.idealTemperature.min,
+			maxIdealTemp = model.idealTemperature.max,
+			minOutputHeat = model.outputHeat.min,
+			maxOutputHeat = model.outputHeat.max,
+			diffusionRate = model.diffusionRate,
+			randomMoveChance = model.randomMoveChance,
+			unhappiness = 1,
 			init = function(agent)
-				agent.minIdealTemp = model.idealTemperature.min
-				agent.maxIdealTemp = model.idealTemperature.max
-				agent.minOutputHeat = model.outputHeat.min
-				agent.maxOutputHeat = model.outputHeat.max
-				agent.diffusionRate = model.diffusionRate
-				agent.randomMoveChance = model.randomMoveChance
-				agent.unhappiness = 1
 				agent.idealTemp = agent.minIdealTemp + Random():number(agent.maxIdealTemp - agent.minIdealTemp)
 				agent.outputHeat = agent.minOutputHeat + Random():number(agent.maxOutputHeat - agent.minOutputHeat)
-				agent.diffuse = diffuse
-				agent.step = step
-				agent.heatCell = heatCell
-				agent.setUnhappiness = setUnhappiness
-				agent.decideBestCell = decideBestCell
 			end,
 			execute = function(self)
 				self:diffuse()
@@ -215,14 +227,7 @@ Heatbugs = Model{
 			instance = agent
 		}
 
-		model.env = Environment{
-			model.cs,
-			model.soc
-		}
-
-		model.chart = Chart{
-			target = model.soc
-		}
+		model.env = Environment{model.cs, model.soc}
 
 		model.env:createPlacement()
 
@@ -235,8 +240,9 @@ Heatbugs = Model{
 
 		model.timer = Timer{
 			Event{action = model.soc},
+			Event{action = model.cs},
 			Event{action = model.map},
-			Event{action = model.chart}
+			Event{action = model.chartUnhappy}
 		}
 	end
 }

@@ -41,23 +41,32 @@ LifeCycle = Model{
 			quantity = model.quantity
 		}
 
+		model.cell = Cell{
+			state = function(cell)
+				if cell:getAgent() then
+					return "full"
+				else
+					return "empty"
+				end
+			end
+		}
+
 		model.cs = CellularSpace{
-			xdim = model.dim
+			xdim = model.dim,
+			instance = model.cell
 		}
 
 		model.cs:createNeighborhood()
 
-		model.env = Environment{
-			model.cs,
-			model.soc
-		}
+		model.env = Environment{model.cs, model.soc}
 
 		model.env:createPlacement()
 
 		model.map = Map{
-			target = model.soc,
-			background = model.background,
-			symbol = "turtle"
+			target = model.cs,
+			select = "state",
+			color = {"white", "black"},
+			value = {"empty", "full"}
 		}
 
 		model.chart = Chart{

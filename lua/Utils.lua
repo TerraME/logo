@@ -29,7 +29,7 @@ function getLabyrinth(pattern)
 
 	forEachElement(lines, function(y, line)
 		if xdim ~= string.len(line) then
-			customError("Line "..y.." of file "..mfile.." does not have the same length ("
+			customError("Line "..y.." of file '"..pattern.."' does not have the same length ("
 				..string.len(line)..") of the first line ("..xdim..").")
 		end
 
@@ -43,7 +43,7 @@ function getLabyrinth(pattern)
 				cs:get(x - 1, y - 1).state = "exit"
 			else
 				customError("Invalid character '"..string.sub(line, x, x)
-					.."' in file "..mfile.." (line "..y..").")
+					.."' in file '"..pattern.."' (line "..y..").")
 			end
 		end
 	end)
