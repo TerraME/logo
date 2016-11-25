@@ -21,6 +21,7 @@ Schelling = Model{
 	freeSpace  = Choice{min = 0.05, max = 0.20, step = 0.05},
 	dim        = Choice{min =   25, max =   40, step =    5},
 	preference = Choice{min =    3, max =    6, step =    1},
+	random = true,
 	init = function (model)
 		-- determine the percentage of each team
 		model.range = (1.0 - model.freeSpace) / 2

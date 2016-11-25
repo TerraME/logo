@@ -11,6 +11,7 @@ Overpopulation = Model{
 	quantity = 10,
 	dim = 10,
 	finalTime = 60,
+	random = true,
 	init = function(model)	
 		model.cell = Cell{
 			state = function(cell)

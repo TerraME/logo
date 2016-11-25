@@ -16,6 +16,7 @@ LifeCycle = Model{
 	dim = 10,
 	chart = true,
 	finalTime = 100,
+	random = true,
 	init = function(model)
 		model.agent = LogoAgent{
 			init = function(agent)

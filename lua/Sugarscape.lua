@@ -21,6 +21,7 @@ Sugarscape = Model{
 	sugarMap = Choice(patterns),
 	quantity = 10,
 	finalTime = 200,
+	random = true,
 	init = function(model)
 		model.cs = CellularSpace{
 			file = filePath(model.sugarMap..".pgm", "logo"),

@@ -9,6 +9,7 @@ GrowingSociety = Model{
 	quantity = 1,
 	dim = 20,
 	finalTime = 60,
+	random = true,
 	init = function(model)
 		model.cs = CellularSpace{
 			xdim = model.dim

@@ -137,6 +137,7 @@ Heatbugs = Model{
 			{"temperature"}
 		}
 	end,
+	random = true,
 	init = function(model)
 		local cell = Cell{
 			evaporationRate = model.evaporationRate,
