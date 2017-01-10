@@ -59,7 +59,7 @@ Labyrinth = Model{
 				end
 			end
 		}
-		
+
 		model.soc = Society{
 			instance = model.agent,
 			quantity = model.quantity

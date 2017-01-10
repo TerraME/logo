@@ -100,7 +100,7 @@ metaTableLogoAgent_ = {
 -- @arg data.init A function that gets the agent itself as argument and
 -- will be executed when the agent is initialized.
 -- @arg data.execute A function that gets the agent itself as argument and
--- is called every time step. 
+-- is called every time step.
 -- @usage import("logo")
 --
 -- LogoAgent{}

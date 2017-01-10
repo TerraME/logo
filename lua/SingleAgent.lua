@@ -25,7 +25,7 @@ SingleAgent = Model{
 			instance = model.agent,
 			quantity = model.quantity
 		}
-		
+
 		model.env = Environment{model.cs, model.soc}
 
 		model.env:createPlacement{}

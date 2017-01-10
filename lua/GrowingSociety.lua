@@ -26,7 +26,7 @@ GrowingSociety = Model{
 				agent:relocate()
 			end
 		}
-		
+
 		model.soc = Society{
 			instance = model.agent,
 			quantity = model.quantity
