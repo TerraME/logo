@@ -1,6 +1,4 @@
 
-import("logo")
-
 -- Sex, culture and conflict in Sugarscape
 -- Andre R. Goncalves and Frederico F. Avila
 Sugarscape = Model{
