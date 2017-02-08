@@ -70,7 +70,7 @@ local function heatCell(self)
 	self:getCell().temp = self:getCell().temp + self.outputHeat -- heat up my cell
 end
 
---- Heatbugs is an agent-based model inspired by the behavior of biological agents that seek 
+--- Heatbugs is an agent-based model inspired by the behavior of biological agents that seek
 -- to regulate the temperature of their surrounding environment around an optimum level.
 -- This model demonstrates how agents can organize themselves within a population. The agents
 -- can detect and alter the environmental conditions in their neighborhood, though they can
@@ -103,7 +103,7 @@ end
 -- @arg data.outputHeat Upper and lower edges of amount of heat emitted by agent in each
 -- iteration to its neighbors.  Default ranges from 10 to 20.
 -- @arg data.diffusionRate The rate of amount emitted by agent in each iteration. Default
--- value is 0.9. 
+-- value is 0.9.
 -- @arg data.randomMoveChance Probability to move randomly, instead of choosing
 -- coolest/hottest neighbor. Default is 0.5.
 -- with the number of Agents along the simulation should be drawn.
@@ -133,10 +133,11 @@ Heatbugs = Model{
 	interface = function()
 		return {
 			{"number"},
-			{"idealTemperature", "outputHeat"}, 
+			{"idealTemperature", "outputHeat"},
 			{"temperature"}
 		}
 	end,
+	random = true,
 	init = function(model)
 		local cell = Cell{
 			evaporationRate = model.evaporationRate,

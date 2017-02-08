@@ -9,6 +9,7 @@ GrowingSociety = Model{
 	quantity = 1,
 	dim = 20,
 	finalTime = 60,
+	random = true,
 	init = function(model)
 		model.cs = CellularSpace{
 			xdim = model.dim
@@ -25,7 +26,7 @@ GrowingSociety = Model{
 				agent:relocate()
 			end
 		}
-		
+
 		model.soc = Society{
 			instance = model.agent,
 			quantity = model.quantity
@@ -47,7 +48,8 @@ GrowingSociety = Model{
 
 		model.timer = Timer{
 			Event{action = model.soc},
-			Event{action = model.map}
+			Event{action = model.map},
+			Event{action = model.chart}
 		}
 	end
 }

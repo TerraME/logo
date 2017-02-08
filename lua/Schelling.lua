@@ -1,4 +1,4 @@
---- Schelling's segregation model. In 1971, the American economist Thomas Schelling created 
+--- Schelling's segregation model. In 1971, the American economist Thomas Schelling created
 -- an agent-based model that might help explain why segregation is so difficult to combat.
 -- His model of segregation showed that even when individuals (or "agents") didn't mind being
 -- surrounded or living by agents of a different race, they would still choose to segregate
@@ -21,6 +21,7 @@ Schelling = Model{
 	freeSpace  = Choice{min = 0.05, max = 0.20, step = 0.05},
 	dim        = Choice{min =   25, max =   40, step =    5},
 	preference = Choice{min =    3, max =    6, step =    1},
+	random = true,
 	init = function (model)
 		-- determine the percentage of each team
 		model.range = (1.0 - model.freeSpace) / 2
@@ -32,7 +33,7 @@ Schelling = Model{
 				if agent then return agent.state else return "free" end
 			end
 		}
-		
+
 		model.cs = CellularSpace{
 			xdim         = model.dim,
 			instance     = model.cell
@@ -55,14 +56,14 @@ Schelling = Model{
 				end)
 
 				return likeme < model.preference -- how many are like me?
-			end 
+			end
 		}
 
 		-- a society of agents
 		model.society = Society{
 			instance = model.agent,
 			quantity = math.floor(model.dim * model.dim * (1.0 - model.freeSpace)),
-			
+
 			-- execute is the central function of the model
 			-- 1. Select all unhappy agents
 			-- 2. Select all empty cells
@@ -76,18 +77,18 @@ Schelling = Model{
 				if #model.unhappy_agents > 0 then
 					-- get a random unhappy agent
 					local myagent = model.unhappy_agents:sample()
-					
+
 					-- a trajectory of empty cells
 					local empty_cells = Trajectory{
-						target = model.cs, 
-						select = function(cell) 
+						target = model.cs,
+						select = function(cell)
 							return cell:state() == "free"
 						end
 					}
-					
+
 					-- get a random empty cell
 					local newcell = empty_cells:sample()
-					
+
 					-- move the agent to the empty cell
 					myagent:move (newcell)
 				end
@@ -114,7 +115,7 @@ Schelling = Model{
 			color  = "RdYlGn",
 			value  = {"germany", "free", "brazil"}
 		}
-	
+
 		model.unhappy  = function()
 			return 100 * #model.unhappy_agents / #model.society
 		end
@@ -126,7 +127,7 @@ Schelling = Model{
 			label  = "%-unhappy",
 		}
 
-		-- timer 
+		-- timer
 		-- 1. execute the society (put an unhappy agent in an empty cell)
 		-- 2. execute the cell space (colors the cell space)
 		-- 3. execute the map (refresh the map)

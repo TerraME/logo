@@ -25,6 +25,7 @@ Labyrinth = Model{
 	quantity = 1,
 	finalTime = 1000,
 	labyrinth = Choice(patterns),
+	random = true,
 	init = function(model)
 		model.cs = getLabyrinth(model.labyrinth)
 		model.cs:createNeighborhood()
@@ -58,7 +59,7 @@ Labyrinth = Model{
 				end
 			end
 		}
-		
+
 		model.soc = Society{
 			instance = model.agent,
 			quantity = model.quantity

@@ -26,28 +26,28 @@ cs = CellularSpace{
 
 -- create the neighborhood structure for a road
 for i = 1, 20 do
-	local cell = cs:get(i + 10, 5)
+	local mcell = cs:get(i + 10, 5)
 	local neigh = Neighborhood()
 	neigh:add(cs:get(i + 11, 5))
-	cell:addNeighborhood(neigh, "road-1")
+	mcell:addNeighborhood(neigh, "road-1")
 
-	local cell = cs:get(i + 11, 5)
-	local neigh = Neighborhood()
+	mcell = cs:get(i + 11, 5)
+	neigh = Neighborhood()
 	neigh:add(cs:get(i + 10, 5))
-	cell:addNeighborhood(neigh, "road-2")
+	mcell:addNeighborhood(neigh, "road-2")
 end
 
 -- create the neighborhood structure for another road
 for i = 1, 25 do
-	local cell = cs:get(23, i + 8)
+	local mcell = cs:get(23, i + 8)
 	local neigh = Neighborhood()
 	neigh:add(cs:get(23, i + 9))
-	cell:addNeighborhood(neigh, "road-1")
+	mcell:addNeighborhood(neigh, "road-1")
 
-	local cell = cs:get(23, i + 9)
-	local neigh = Neighborhood()
+	mcell = cs:get(23, i + 9)
+	neigh = Neighborhood()
 	neigh:add(cs:get(23, i + 8))
-	cell:addNeighborhood(neigh, "road-2")
+	mcell:addNeighborhood(neigh, "road-2")
 end
 
 agent = Agent{

@@ -11,7 +11,8 @@ Overpopulation = Model{
 	quantity = 10,
 	dim = 10,
 	finalTime = 60,
-	init = function(model)	
+	random = true,
+	init = function(model)
 		model.cell = Cell{
 			state = function(cell)
 				if cell:getAgent() then
@@ -36,7 +37,7 @@ Overpopulation = Model{
 				end
 
 				agent:relocate()
-	
+
 				if agent:countNeighbors() > 3 then
 					agent:die()
 				end

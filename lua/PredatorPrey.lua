@@ -1,5 +1,5 @@
 
---- Predator-prey dynamics. 
+--- Predator-prey dynamics.
 -- @arg data.dim The x and y dimensions of space.
 -- @arg data.finalTime The final simulation time.
 PredatorPrey = Model{
@@ -19,7 +19,7 @@ PredatorPrey = Model{
 			execute = function(self)
 				if self.state == "soil" then
 					self.count = self.count + 1
-					
+
 					if self.count == 4 then
 						self.state = "pasture"
 						self.count = 0
@@ -46,14 +46,14 @@ PredatorPrey = Model{
 			end,
 			execute = function(self)
 				local sample = self:getCell():getNeighborhood():sample()
-				
+
 				if sample:isEmpty() then
 					self:move(sample)
 				end
 
 				self.energy = self.energy - 1
 
-				self:eat() 
+				self:eat()
 
 				sample = self:getCell():getNeighborhood():sample()
 
