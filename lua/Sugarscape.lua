@@ -1,6 +1,11 @@
 
--- Sex, culture and conflict in Sugarscape
--- Andre R. Goncalves and Frederico F. Avila
+--- Sex, Culture, and Conflict: The Emergence of History.
+-- Chapter 3 of Joshua M. Epstein & Robert Axtell,
+-- Growing Artificial Societies: Social Science from the Bottom Up.
+-- This model was implemented by Andre R. Goncalves and Frederico F. Avila.
+-- @arg data.initPop The initial number of Agents in the model.
+-- @arg data.finalTime The final simulation time.
+-- @image sugarscape.bmp
 Sugarscape = Model{
 	finalTime = 50,
 	initPop = 400,
@@ -209,11 +214,7 @@ Sugarscape = Model{
 			title = "Fit"
 		}
 
-		model.env = Environment{
-			model.cs,
-			model.society
-		}
-
+		model.env = Environment{model.cs, model.society}
 		model.env:createPlacement()
 
 		model.map1 = Map{
@@ -254,6 +255,4 @@ Sugarscape = Model{
 		}
 	end
 }
-
-Sugarscape:run()
 

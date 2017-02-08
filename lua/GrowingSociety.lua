@@ -48,7 +48,8 @@ GrowingSociety = Model{
 
 		model.timer = Timer{
 			Event{action = model.soc},
-			Event{action = model.map}
+			Event{action = model.map},
+			Event{action = model.chart}
 		}
 	end
 }

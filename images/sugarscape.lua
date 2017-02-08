@@ -5,8 +5,8 @@ import("logo")
 
 sa = Sugarscape{finalTime = 40}
 
-sa:execute()
+sa:run()
 
-sa.map:save("sugarscape.bmp")
+sa.map2:save("sugarscape.bmp")
 clean()
 

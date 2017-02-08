@@ -1,4 +1,4 @@
-version = "0.4.3"
+version = "0.5"
 package = "logo"
 license = "GPL"
 title = "Simple spatial ABM"
