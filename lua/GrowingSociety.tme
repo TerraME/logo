@@ -1,14 +1,14 @@
 return {
 	[1] = {
-		x = 55, 
+		x = 14, 
 		y = 49, 
-		width = 765, 
-		height = 483, 
+		width = 436, 
+		height = 419, 
 	}, 
 	[2] = {
-		x = 140, 
-		y = 561, 
-		width = 600, 
-		height = 242, 
+		x = 455, 
+		y = 103, 
+		width = 650, 
+		height = 322, 
 	}, 
 }
