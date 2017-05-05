@@ -4,7 +4,7 @@
 -- behavioural rules and the use of local information and indirect communication. This
 -- behaviour is useful to researches from different fields, especially in Swarm Robotics and
 -- computational intelligence.
--- Implemented by Bernardo Dornellas de Mendonca Martins dos Reis (more information available at 
+-- Implemented by Bernardo Dornellas de Mendonca Martins dos Reis (more information available at
 -- http://www.terralab.ufop.br/dokuwiki/doku.php?id=terralab:curso:envsoft:finalproject:ant1).
 -- Original authors: Fesseha Belay & Javier Morata.
 -- @arg data.dimension Space dimensions. A number with 50 as default value.
@@ -25,7 +25,7 @@ Ants = Model{
 		local icell = Cell{
 			cover = "empty",
 			chemical = 0,
-			execute = function(cell) -- chemical evaporation 
+			execute = function(cell) -- chemical evaporation
 				if cell.chemical > 0 then
 					cell.chemical = cell.chemical - model.rateEvaporation
 				end
@@ -116,19 +116,12 @@ Ants = Model{
 				local cell = agent:getCell()
 				local any_chem = false
 
-				-- If "ant" find lesschemical go there
+				-- If "ant" find chemical or lesschemical go there
 				forEachNeighbor(cell, function(_, neigh)
-					if neigh.cover == "lesschem" and not any_chem and neigh:isEmpty() then
+					if belong(neigh.cover, {"chemical", "lesschem"}) and not any_chem and neigh:isEmpty() then
 						agent:move(neigh)
 						any_chem = true
-					end
-				end)
-
-				-- If "ant" find chemical go there
-				forEachNeighbor(cell, function(_, neigh)
-					if neigh.cover == "chemical" and not any_chem and neigh:isEmpty() then
-						agent:move(neigh)
-						any_chem = true
+						return false
 					end
 				end)
 
@@ -161,14 +154,9 @@ Ants = Model{
 							end
 						end
 					end)
-
-					agent:move(new_cell)
-				elseif new_cell.cover == "food" then
-					cell = agent:getCell():getNeighborhood():sample()
-					if cell:isEmpty() then
-						agent:move(cell)
-					end
 				end
+
+				agent:move(new_cell)
 			end,
 			execute = function(agent)
 				if agent.state == "searching" then
@@ -179,7 +167,7 @@ Ants = Model{
 
 				-- return model.cs.food > 0 -- Uncomment for stopping simulation when last food is taken
 			end,
-			findFood = function(agent) 
+			findFood = function(agent)
 				local cell = agent:getCell()
 				forEachNeighbor(cell, function(_, neigh)
 					if neigh.cover == "food" then
@@ -207,7 +195,7 @@ Ants = Model{
 
 				return false
 			end,
-			findNest = function(agent) 
+			findNest = function(agent)
 				local cell = agent:getCell()
 				forEachNeighbor(cell, function(_, neigh)
 					if neigh.cover == "nest" then
@@ -221,10 +209,10 @@ Ants = Model{
 			goto_cell = function(agent)
 				local dest = agent.dest
 				local cell = agent:getCell()
-				
+
 				local new_coord = cell:getNextCoordinateTowardDestiny(dest)
 				local new_cell = model.cs:get(new_coord.x, new_coord.y)
-				
+
 				if new_cell.cover ~= "food" and new_cell.cover ~= "nest" and new_cell:isEmpty() then
 					agent:move(new_cell)
 				else
@@ -254,7 +242,7 @@ Ants = Model{
 		}
 
 		model.soc = Society{
-			instance = familyAnt, 
+			instance = familyAnt,
 			quantity = model.societySize
 		}
 
@@ -264,7 +252,7 @@ Ants = Model{
 			value = {"empty", "food", "nest", "chemical", "lesschem"},
 			color = {"brown", "blue", "red", "green", "darkGreen"}
 		}
-		
+
 		model.env = Environment{model.cs, model.soc}
 
 		-- how agents will be placed inside a environment
