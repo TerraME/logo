@@ -10,11 +10,11 @@ function getLabyrinth(pattern)
 	local mfile = filePath(pattern..".labyrinth", "logo")
 
 	local lines = {}
-	local mline = mfile:read()
+	local mline = mfile:readLine()
 
 	repeat
 		table.insert(lines, mline)
-		mline = mfile:read()
+		mline = mfile:readLine()
 	until not mline
 
 	local xdim = string.len(lines[1])
