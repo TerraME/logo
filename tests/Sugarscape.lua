@@ -4,7 +4,8 @@
 return{
 	Sugarscape = function(unitTest)
 		local model = Sugarscape{
-			finalTime = 10
+			finalTime = 70,
+			initPop = 40
 		}
 
 		unitTest:assertSnapshot(model.map1, "Sugarscape-map-1-begin.bmp", 0.1)

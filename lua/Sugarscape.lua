@@ -100,8 +100,8 @@ Sugarscape = Model{
 						-- look for an empty space in partner neighbors
 						forEachNeighbor(partner:getCell(), function(_, n) --scan partner neighbors
 							-- local agent and distance to neigh
-							if self:withinVision(n) and n:isEmpty() then
-								nest = n -- updates nest
+							if self:withinVision(n) and n:isEmpty() then -- SKIP
+								nest = n -- updates nest -- SKIP
 							end
 						end)
 					end
