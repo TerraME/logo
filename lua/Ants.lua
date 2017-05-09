@@ -164,33 +164,31 @@ Ants = Model{
 				elseif agent.state == "bringing" then
 					agent:bring_food()
 				end
-
-				-- return model.cs.food > 0 -- Uncomment for stopping simulation when last food is taken
 			end,
 			findFood = function(agent)
 				local cell = agent:getCell()
 				forEachNeighbor(cell, function(_, neigh)
-					if neigh.cover == "food" then
-						neigh.cover = "chemical"
+					if neigh.cover ~= "food" then return end
 
-						cell = agent:getCell()
-						forEachNeighbor(cell, function(_, neigh2)
-							if neigh2.cover ~= "food" and neigh2.cover ~= "nest" then
-								neigh2.cover = "chemical"
-								neigh2.chemical = neigh2.chemical + model.rateDiffusion
-								forEachNeighbor(neigh2, function(_, neigh3)
-									if neigh3.cover ~= "food" and neigh3.cover ~= "nest" then
-										neigh3.cover = "lesschem"
-										neigh3.chemical = neigh3.chemical + model.rateDiffusion / 2
-									end
-								end)
-							end
-						end)
+					neigh.cover = "chemical"
 
-						agent.state = "bringing"
-						model.cs.food = model.cs.food - 1
-						return true
-					end
+					cell = agent:getCell()
+					forEachNeighbor(cell, function(_, neigh2)
+						if neigh2.cover ~= "food" and neigh2.cover ~= "nest" then
+							neigh2.cover = "chemical"
+							neigh2.chemical = neigh2.chemical + model.rateDiffusion
+							forEachNeighbor(neigh2, function(_, neigh3)
+								if neigh3.cover ~= "food" and neigh3.cover ~= "nest" then
+									neigh3.cover = "lesschem"
+									neigh3.chemical = neigh3.chemical + model.rateDiffusion / 2
+								end
+							end)
+						end
+					end)
+
+					agent.state = "bringing"
+					model.cs.food = model.cs.food - 1
+					return true
 				end)
 
 				return false
@@ -255,7 +253,6 @@ Ants = Model{
 
 		model.env = Environment{model.cs, model.soc}
 
-		-- how agents will be placed inside a environment
 		model.env:createPlacement{
 			strategy = "void"
 		}
