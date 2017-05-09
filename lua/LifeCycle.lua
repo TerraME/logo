@@ -66,7 +66,7 @@ LifeCycle = Model{
 		model.map = Map{
 			target = model.cs,
 			select = "state",
-			color = {"white", "black"},
+			color = {"green", "black"},
 			value = {"empty", "full"}
 		}
 

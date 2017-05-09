@@ -60,7 +60,8 @@ Overpopulation = Model{
 		model.map = Map{
 			target = model.cs,
 			select = "state",
-			color = {"white", "black"},
+			grid = true,
+			color = {"green", "black"},
 			value = {"empty", "full"}
 		}
 

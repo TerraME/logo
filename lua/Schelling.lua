@@ -16,10 +16,11 @@
 -- @arg data.preference What is the minimum number of neighbor agents be like me
 -- that makes me satisfied with my current cell? The default value is 3.
 -- @arg data.finalTime The final simulation time. The default value is 500.
+-- @image schelling.bmp
 Schelling = Model{
 	finalTime  = Choice{min = 10,   default = 500},
 	freeSpace  = Choice{min = 0.05, max = 0.20, step = 0.05},
-	dim        = Choice{min =   25, max =   40, step =    5},
+	dim        = Choice{min =   25, max =  400, step =   25},
 	preference = Choice{min =    3, max =    6, step =    1},
 	random = true,
 	init = function (model)

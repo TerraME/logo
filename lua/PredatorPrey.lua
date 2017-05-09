@@ -2,6 +2,7 @@
 --- Predator-prey dynamics.
 -- @arg data.dim The x and y dimensions of space.
 -- @arg data.finalTime The final simulation time.
+-- @image predatorprey.bmp
 PredatorPrey = Model{
 	finalTime = 500,
 	dim = 30,
