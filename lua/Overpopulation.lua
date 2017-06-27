@@ -30,15 +30,22 @@ Overpopulation = Model{
 
 		model.cs:createNeighborhood()
 
-		model.agent = LogoAgent{
+		model.agent = Agent{
 			execute = function(agent)
-				if Random():number() < 0.3 then
-					agent:breed()
+				if Random{p = 0.3}:sample() then
+					agent:reproduce()
 				end
 
-				agent:relocate()
+				agent:walkToEmpty()
 
-				if agent:countNeighbors() > 3 then
+				local count = 0
+				forEachNeighbor(agent:getCell(), function(neigh)
+					if not neigh:isEmpty() then
+						count = count + 1
+					end
+				end)
+
+				if count > 3 then
 					agent:die()
 				end
 			end

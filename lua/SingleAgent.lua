@@ -15,9 +15,9 @@ SingleAgent = Model{
 
 		model.cs:createNeighborhood()
 
-		model.agent = LogoAgent{
+		model.agent = Agent{
 			execute = function(self)
-				self:relocate()
+				self:walkToEmpty()
 			end
 		}
 

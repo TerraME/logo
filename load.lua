@@ -1,6 +1,5 @@
 files = {
 	"Utils.lua",
-	"LogoAgent.lua",
 	"Ants.lua",
 	"Schelling.lua",
 	"Heatbugs.lua",

@@ -77,7 +77,7 @@ Sugarscape = Model{
 				-- Rule S: Find a mate and reproduce
 				local mates = {} -- potential mates
 				local emptycell = {} -- in beginning there is no empty cell
-				forEachNeighbor(self:getCell(), function(_, neigh)
+				forEachNeighbor(self:getCell(), function(neigh)
 					if not self:withinVision(neigh) then return end
 
 					local other = neigh:getAgent()
@@ -98,7 +98,7 @@ Sugarscape = Model{
 						table.remove(emptycell, 1) --exclude empty cell from list
 					else
 						-- look for an empty space in partner neighbors
-						forEachNeighbor(partner:getCell(), function(_, n) --scan partner neighbors
+						forEachNeighbor(partner:getCell(), function(n) --scan partner neighbors
 							-- local agent and distance to neigh
 							if self:withinVision(n) and n:isEmpty() then -- SKIP
 								nest = n -- updates nest -- SKIP
@@ -126,7 +126,7 @@ Sugarscape = Model{
 				local cell = self:getCell()
 				local neighs = {cell} -- cells to move
 				-- neighborhood will depend on agents vison
-				forEachNeighbor(self:getCell(), function(_, n)
+				forEachNeighbor(self:getCell(), function(n)
 					if not self:withinVision(n) then return end
 
 					-- if finds empty neigh with more sugar: replace element

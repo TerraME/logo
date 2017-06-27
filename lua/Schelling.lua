@@ -49,7 +49,7 @@ Schelling = Model{
 			isUnhappy = function(agent)
 				local mycell = agent:getCell()
 				local likeme = 0
-				forEachNeighbor(mycell, function(_, neigh)
+				forEachNeighbor(mycell, function(neigh)
 					local other = neigh:getAgent()
 					if other and other.state == agent.state then
 						likeme = likeme + 1

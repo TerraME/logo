@@ -18,7 +18,7 @@ LifeCycle = Model{
 	finalTime = 100,
 	random = true,
 	init = function(model)
-		model.agent = LogoAgent{
+		model.agent = Agent{
 			init = function(agent)
 				agent.age = 0
 			end,
@@ -26,10 +26,10 @@ LifeCycle = Model{
 				agent.age = agent.age + 1
 
 				if agent.age >= 15 and agent.age <= 30 and Random():number() < 0.3 then
-					agent:breed()
+					agent:reproduce()
 				end
 
-				agent:relocate()
+				agent:walkToEmpty()
 
 				if Random():number() < 0.05 and agent.age >= 20 then
 					agent:die()

@@ -73,7 +73,7 @@ Ants = Model{
 		local center = math.floor(model.dimension / 2)
 		local nest_cell = model.cs:get(center, center)
 		nest_cell.cover = "nest"
-		forEachNeighbor(nest_cell, function(_, neigh)
+		forEachNeighbor(nest_cell, function(neigh)
 			neigh.cover = "nest"
 		end)
 
@@ -91,9 +91,9 @@ Ants = Model{
 		local function drawFood(x, y)
 			local cell = model.cs:get(math.floor(x), math.floor(y))
 			cell.cover = "food"
-			forEachNeighbor(cell, function(_, neigh)
+			forEachNeighbor(cell, function(neigh)
 				neigh.cover = "food"
-				forEachNeighbor(neigh, function(_, neigh2)
+				forEachNeighbor(neigh, function(neigh2)
 					neigh2.cover = "food"
 				end)
 			end)
@@ -117,7 +117,7 @@ Ants = Model{
 				local any_chem = false
 
 				-- If "ant" find chemical or lesschemical go there
-				forEachNeighbor(cell, function(_, neigh)
+				forEachNeighbor(cell, function(neigh)
 					if belong(neigh.cover, {"chemical", "lesschem"}) and not any_chem and neigh:isEmpty() then
 						agent:move(neigh)
 						any_chem = true
@@ -144,7 +144,7 @@ Ants = Model{
 					agent:getCell().cover = "chemical"
 					agent:getCell().chemical = agent:getCell().chemical + model.rateDiffusion
 
-					forEachNeighbor(cell, function(_, neigh)
+					forEachNeighbor(cell, function(neigh)
 						if neigh.cover ~= "food" and neigh.cover ~= "nest" and neigh.cover ~= "chemical" then
 							neigh.chemical = neigh.chemical + (model.rateDiffusion / 2)
 							if neigh.chemical > 0 and neigh.chemical <= 1 then
@@ -167,17 +167,17 @@ Ants = Model{
 			end,
 			findFood = function(agent)
 				local cell = agent:getCell()
-				forEachNeighbor(cell, function(_, neigh)
+				forEachNeighbor(cell, function(neigh)
 					if neigh.cover ~= "food" then return end
 
 					neigh.cover = "chemical"
 
 					cell = agent:getCell()
-					forEachNeighbor(cell, function(_, neigh2)
+					forEachNeighbor(cell, function(neigh2)
 						if neigh2.cover ~= "food" and neigh2.cover ~= "nest" then
 							neigh2.cover = "chemical"
 							neigh2.chemical = neigh2.chemical + model.rateDiffusion
-							forEachNeighbor(neigh2, function(_, neigh3)
+							forEachNeighbor(neigh2, function(neigh3)
 								if neigh3.cover ~= "food" and neigh3.cover ~= "nest" then
 									neigh3.cover = "lesschem"
 									neigh3.chemical = neigh3.chemical + model.rateDiffusion / 2
@@ -195,7 +195,7 @@ Ants = Model{
 			end,
 			findNest = function(agent)
 				local cell = agent:getCell()
-				forEachNeighbor(cell, function(_, neigh)
+				forEachNeighbor(cell, function(neigh)
 					if neigh.cover == "nest" then
 						agent.state = "searching"
 						return true

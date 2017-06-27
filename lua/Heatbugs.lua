@@ -7,7 +7,7 @@ end
 local function diffuse(self)
 	local cell = self:getCell()
 	local amount = (cell.temp * self.diffusionRate) / 8
-	forEachNeighbor(cell, function(_, n)
+	forEachNeighbor(cell, function(n)
 		n.temp = n.temp + amount
 	end)
 end
@@ -40,7 +40,7 @@ local function decideBestCell(self)
 	if currCell.temp < self.idealTemp then -- if i am cold
 		-- choose max temp
 		diff = currCell.temp
-		forEachNeighbor(currCell, function(_, n)
+		forEachNeighbor(currCell, function(n)
 			if n.temp > diff and n:isEmpty() then
 				diff = n.temp
 				bestCell = {n}
@@ -52,7 +52,7 @@ local function decideBestCell(self)
 		-- choose minimum temp
 		diff = currCell.temp
 
-		forEachNeighbor(currCell, function(_, n)
+		forEachNeighbor(currCell, function(n)
 			if n.temp < diff and n:isEmpty() then
 				diff = n.temp
 				bestCell = {n}

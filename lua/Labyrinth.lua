@@ -42,7 +42,7 @@ Labyrinth = Model{
 				local empty = {}
 				local exit
 
-				forEachNeighbor(agent:getCell(), function(_, neigh)
+				forEachNeighbor(agent:getCell(), function(neigh)
 					if neigh.state == "exit" then
 						exit = neigh
 					elseif neigh.state == "empty" then
