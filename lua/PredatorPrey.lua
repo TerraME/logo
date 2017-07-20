@@ -125,7 +125,8 @@ PredatorPrey = Model{
 
 		model.chart = Chart{
 			target = model,
-			select = {"qrabbits", "qwolves"}
+			select = {"qrabbits", "qwolves"},
+			color = {"blue", "red"}
 		}
 
 		model.map1 = Map{
@@ -139,7 +140,7 @@ PredatorPrey = Model{
 			target = model.cs,
 			select = "who",
 			value = {"empty", "wolf", "rabbit"},
-			color = {"white", "gray", "blue"}
+			color = {"white", "red", "blue"}
 		}
 
 		model.timer = Timer{
