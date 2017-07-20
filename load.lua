@@ -1,6 +1,7 @@
 files = {
 	"Utils.lua",
 	"Ants.lua",
+	"Disease.lua",
 	"Schelling.lua",
 	"Heatbugs.lua",
 	"LifeCycle.lua",

@@ -34,3 +34,9 @@ data{
 	source = "TerraME team"
 }
 
+directory{
+	name = "error",
+	summary = "Some files with error, used for internal tests.",
+	source = "TerraME team",
+}
+
