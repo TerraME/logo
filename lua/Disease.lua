@@ -28,8 +28,7 @@ Disease = Model{
 				end
 			end,
 			execute = function(self)
-				if self.state == "recovered" then return
-				elseif self.state == "infected" then
+				if self.state == "infected" then
 					forEachConnection(self, function(conn)
 						self:message{receiver = conn, delay = 1}
 					end)

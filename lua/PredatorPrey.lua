@@ -46,21 +46,21 @@ PredatorPrey = Model{
 				end
 			end,
 			execute = function(self)
-				local sample = self:getCell():getNeighborhood():sample()
+				local cell = self:getCell():getNeighborhood():sample()
 
-				if sample:isEmpty() then
-					self:move(sample)
+				if cell:isEmpty() then
+					self:move(cell)
 				end
 
 				self.energy = self.energy - 1
 
 				self:eat()
 
-				sample = self:getCell():getNeighborhood():sample()
+				cell = self:getCell():getNeighborhood():sample()
 
-				if self.energy >= 30 and sample:isEmpty() then
+				if self.energy >= 30 and cell:isEmpty() then
 					local child = self:reproduce()
-					child:move(sample)
+					child:move(cell)
 
 					self.energy = self.energy / 2
 					child.energy = self.energy
@@ -81,18 +81,18 @@ PredatorPrey = Model{
 			energy = 40,
 			name = "wolf",
 			execute = function(self)
-				local sample = self:getCell():getNeighborhood():sample()
+				local cell = self:getCell():getNeighborhood():sample()
 
-				if sample:isEmpty() then
+				if cell:isEmpty() then
 					if self.energy >= 50 then
 						local child = self:reproduce()
-						child:move(sample)
+						child:move(cell)
 						self.energy = self.energy / 2
 					else
-						self:move(sample)
+						self:move(cell)
 					end
-				elseif sample:getAgent().name == "rabbit" then
-					local prey = sample:getAgent()
+				elseif cell:getAgent().name == "rabbit" then
+					local prey = cell:getAgent()
 
 					self.energy = self.energy + prey.energy * 0.2
 					prey:die()

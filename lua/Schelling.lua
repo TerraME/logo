@@ -65,12 +65,12 @@ Schelling = Model{
 			instance = model.agent,
 			quantity = math.floor(model.dim * model.dim * (1.0 - model.freeSpace)),
 
-			-- execute is the central function of the model
+			-- step is the central function of the model
 			-- 1. Select all unhappy agents
 			-- 2. Select all empty cells
 			-- 3. Choose a random unhappy agent and put it in an empty cell
 			-- (repeat until final time)
-			execute = function()
+			step = function()
 				-- a group of unhappy agents
 				model.unhappy_agents:filter()
 
@@ -134,7 +134,7 @@ Schelling = Model{
 		-- 3. execute the map (refresh the map)
 		-- 4. execute the chart (update the chart)
 		model.timer = Timer{
-			Event{action = model.society},
+			Event{action = function() model.society:step() end},
 			Event{action = model.map    },
 			Event{action = model.chart  }
 		}
