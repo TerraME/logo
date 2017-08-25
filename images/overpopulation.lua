@@ -3,9 +3,9 @@ Random{seed = 12345}
 
 import("logo")
 
-over = Overpopulation{finalTime = 15}
+over = Overpopulation{dim = 50, finalTime = 50}
 
-over:execute()
+over:run()
 
 over.map:save("overpopulation.bmp")
 clean()

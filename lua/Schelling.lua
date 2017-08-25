@@ -16,10 +16,11 @@
 -- @arg data.preference What is the minimum number of neighbor agents be like me
 -- that makes me satisfied with my current cell? The default value is 3.
 -- @arg data.finalTime The final simulation time. The default value is 500.
+-- @image schelling.bmp
 Schelling = Model{
 	finalTime  = Choice{min = 10,   default = 500},
 	freeSpace  = Choice{min = 0.05, max = 0.20, step = 0.05},
-	dim        = Choice{min =   25, max =   40, step =    5},
+	dim        = Choice{min =   25, max =  400, step =   25},
 	preference = Choice{min =    3, max =    6, step =    1},
 	random = true,
 	init = function (model)
@@ -48,7 +49,7 @@ Schelling = Model{
 			isUnhappy = function(agent)
 				local mycell = agent:getCell()
 				local likeme = 0
-				forEachNeighbor(mycell, function(_, neigh)
+				forEachNeighbor(mycell, function(neigh)
 					local other = neigh:getAgent()
 					if other and other.state == agent.state then
 						likeme = likeme + 1
@@ -64,12 +65,12 @@ Schelling = Model{
 			instance = model.agent,
 			quantity = math.floor(model.dim * model.dim * (1.0 - model.freeSpace)),
 
-			-- execute is the central function of the model
+			-- step is the central function of the model
 			-- 1. Select all unhappy agents
 			-- 2. Select all empty cells
 			-- 3. Choose a random unhappy agent and put it in an empty cell
 			-- (repeat until final time)
-			execute = function()
+			step = function()
 				-- a group of unhappy agents
 				model.unhappy_agents:filter()
 
@@ -133,7 +134,7 @@ Schelling = Model{
 		-- 3. execute the map (refresh the map)
 		-- 4. execute the chart (update the chart)
 		model.timer = Timer{
-			Event{action = model.society},
+			Event{action = function() model.society:step() end},
 			Event{action = model.map    },
 			Event{action = model.chart  }
 		}
