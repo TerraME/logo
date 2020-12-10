@@ -3,9 +3,9 @@ Random{seed = 12345}
 
 import("logo")
 
-ls = LifeCycle{finalTime = 15}
+ls = LifeCycle{dim = 50, finalTime = 50}
 
-ls:execute()
+ls:run()
 
 ls.map:save("life-cycle.bmp")
 clean()

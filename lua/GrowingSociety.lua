@@ -17,13 +17,13 @@ GrowingSociety = Model{
 
 		model.cs:createNeighborhood()
 
-		model.agent = LogoAgent{
+		model.agent = Agent{
 			execute = function(agent)
-				if Random():number() < 0.2 then
-					agent:breed()
+				if Random{p = 0.2}:sample() then
+					agent:reproduce()
 				end
 
-				agent:relocate()
+				agent:walkToEmpty()
 			end
 		}
 
