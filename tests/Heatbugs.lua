@@ -15,6 +15,7 @@ return{
 		unitTest:assertSnapshot(model.chartUnhappy, "Heatbugs-chart-2.bmp", 0.1)
 		unitTest:assertSnapshot(model.heatmap, "Heatbugs-map-1-end.bmp", 0.1)
 		unitTest:assertSnapshot(model.map, "Heatbugs-map-2-end.bmp", 0.1)
+		unitTest:assertSnapshot(model.map, "Heatbugs-map-2-end.bmp", 0.1)
 	end,
 }
 
