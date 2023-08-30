@@ -14,7 +14,7 @@ local payoff = {
 -- Biological Games, Science 303(5659):793-799.
 -- @arg data.dim Space dimensions. A number with 101 as default value.
 -- @arg data.finalTime Final simulation time. A number with 200 as default value.
--- @image ants.bmp
+-- @image spd.png
 SpatialPD = Model{
     finalTime = 200,
     dim = 101,
